@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-EntryPoint", "1-EntryPoint", "{25C5EFCE-30CF-4E09-9013-6AA28807E756}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.EntryPoint", "src\Hexagonalarch.EntryPoint\HexagonalArch.EntryPoint.csproj", "{65D56166-B3B3-44F4-8FA6-427C637715E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Core", "2-Core", "{97E154BD-C545-4E61-9D84-3DB7C1A9C8F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Domain", "src\HexagonalArch.Domain\HexagonalArch.Domain.csproj", "{BA774614-3C4A-4343-89C0-6CFBBD7F4C21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Application", "src\HexagonalArch.Application\HexagonalArch.Application.csproj", "{B212C0B1-1C02-4712-8C1E-3E4D5DCAAD28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Adapters", "3-Adapters", "{24C85EF3-1F98-488B-9297-7D8A845EE23C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Http", "src\Hexagonalarch.Adapter.Http\HexagonalArch.Adapter.Http.csproj", "{02111843-DE40-41D8-97C6-32AF7D868DA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65D56166-B3B3-44F4-8FA6-427C637715E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D56166-B3B3-44F4-8FA6-427C637715E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D56166-B3B3-44F4-8FA6-427C637715E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D56166-B3B3-44F4-8FA6-427C637715E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA774614-3C4A-4343-89C0-6CFBBD7F4C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA774614-3C4A-4343-89C0-6CFBBD7F4C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA774614-3C4A-4343-89C0-6CFBBD7F4C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA774614-3C4A-4343-89C0-6CFBBD7F4C21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B212C0B1-1C02-4712-8C1E-3E4D5DCAAD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B212C0B1-1C02-4712-8C1E-3E4D5DCAAD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B212C0B1-1C02-4712-8C1E-3E4D5DCAAD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B212C0B1-1C02-4712-8C1E-3E4D5DCAAD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02111843-DE40-41D8-97C6-32AF7D868DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02111843-DE40-41D8-97C6-32AF7D868DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02111843-DE40-41D8-97C6-32AF7D868DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02111843-DE40-41D8-97C6-32AF7D868DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65D56166-B3B3-44F4-8FA6-427C637715E2} = {25C5EFCE-30CF-4E09-9013-6AA28807E756}
+		{BA774614-3C4A-4343-89C0-6CFBBD7F4C21} = {97E154BD-C545-4E61-9D84-3DB7C1A9C8F2}
+		{B212C0B1-1C02-4712-8C1E-3E4D5DCAAD28} = {97E154BD-C545-4E61-9D84-3DB7C1A9C8F2}
+		{02111843-DE40-41D8-97C6-32AF7D868DA9} = {24C85EF3-1F98-488B-9297-7D8A845EE23C}
+	EndGlobalSection
+EndGlobal
