@@ -13,15 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Domain.Test",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7481C4A2-1668-49D9-B2DF-23321B6226E6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Core", "2-Core", "{AF37F46B-AAD3-4D4F-A156-6E7697271B15}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AF37F46B-AAD3-4D4F-A156-6E7697271B15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Application", "src\HexagonalArch.Application\HexagonalArch.Application.csproj", "{5C06F9F5-17CF-456F-BDCF-989CB34EC89C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Adapters", "3-Adapters", "{439115CB-87E2-4D82-8D4E-85A12919CCD6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{439115CB-87E2-4D82-8D4E-85A12919CCD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Http", "src\HexagonalArch.Adapter.Http\HexagonalArch.Adapter.Http.csproj", "{EAFFD6D8-37F2-44EC-8521-916741F78D5D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-EntryPoints", "1-EntryPoints", "{DE13538E-ABE7-417F-B453-7AF107A918CB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntryPoints", "EntryPoints", "{DE13538E-ABE7-417F-B453-7AF107A918CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.EntryPoint", "src\HexagonalArch.EntryPoint\HexagonalArch.EntryPoint.csproj", "{C415F62B-7D20-4DAD-9365-D8F7154D97A3}"
 EndProject
