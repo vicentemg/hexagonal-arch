@@ -1,11 +1,16 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using HexagonalArch.Adapter.Cache;
+using HexagonalArch.Adapter.Persistance;
+
+var builder = WebApplication.CreateBuilder(args);
 
 builder
     .Services
-    .AddHttpAdapter();
+    .ConfigureHttpAdapter()
+    .ConfigureCacheAdapter()
+    .ConfigurePersistanceAdapter();
 
 var app = builder.Build();
 
-app.ConfigureHttpAdapter();
+app.UseHttpAdapter();
 
 app.Run();
