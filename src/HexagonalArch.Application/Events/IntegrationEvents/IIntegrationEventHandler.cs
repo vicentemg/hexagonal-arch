@@ -1,6 +1,4 @@
-using HexagonalArch.Application.Events.IntegrationEvents;
-
-namespace HexagonalArch.Application.Events;
+namespace HexagonalArch.Application.Events.IntegrationEvents;
 
 public interface IIntegrationEventHandler<in TEvent> where TEvent : IntegrationEvent
 {

@@ -14,10 +14,12 @@ public record Result<TValue>
     }
 
     public TValue Value => _value;
+
     public IReadOnlyCollection<string> Errors => _errors;
 
     public bool IsSuccess
         => (_errors is null || _errors?.Length == 0) && _value is not null;
+
     public static Result<TValue> Success(TValue value)
         => new(value);
 
