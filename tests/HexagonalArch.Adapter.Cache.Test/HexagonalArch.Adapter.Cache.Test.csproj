@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\src\HexagonalArch.Adapter.Cache\HexagonalArch.Adapter.Cache.csproj" />
   </ItemGroup>
 
+  <Target Name="RunTests" BeforeTargets="Test">
+    <Exec Command="dotnet test --collect:CodeCoverage" />
+  </Target>
+
 </Project>

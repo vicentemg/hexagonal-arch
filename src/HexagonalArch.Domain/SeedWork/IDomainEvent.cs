@@ -1,5 +1,7 @@
+using MediatR;
+
 namespace HexagonalArch.Domain.SeedWork;
 
-public interface IDomainEvent
+public interface IDomainEvent : INotification
 {
 }

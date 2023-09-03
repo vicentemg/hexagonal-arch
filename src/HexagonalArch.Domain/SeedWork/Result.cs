@@ -27,6 +27,6 @@ public record Result<TValue>
         => new(errors);
 
     public static implicit operator Result<TValue>(TValue value)
-        => new(value);
+        => Success(value);
 
 }

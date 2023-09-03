@@ -1,11 +1,12 @@
 using HexagonalArch.Domain.SeedWork;
 
-namespace HexagonalArch.Domain.Aggregates.TransactionAggregate;
+namespace HexagonalArch.Domain.Primitives;
 
 public record Period(DateTime Start, DateTime End)
 {
-    public int Days => (Start - End).Days;
+    public int Days => (End - Start).Days;
 
+    public bool InRage(DateTime dateTime) => dateTime >= Start && dateTime <= End;
     public static Result<Period> Create(DateTime dateOne, DateTime dateTwo)
     {
         if (dateOne > dateTwo)
@@ -13,6 +14,6 @@ public record Period(DateTime Start, DateTime End)
             return Result<Period>.Failure(new[] { "invalid range of dates" });
         }
 
-        return Result<Period>.Success(new(dateOne, dateTwo));
+        return new Period(dateOne, dateTwo);
     }
 }

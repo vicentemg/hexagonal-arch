@@ -1,4 +1,4 @@
-using HexagonalArch.Domain.Aggregates.TransactionAggregate;
+using HexagonalArch.Domain.Primitives;
 
 namespace HexagonalArch.Domain.Test.Aggregates.TransactionAggregate;
 
