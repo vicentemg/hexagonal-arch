@@ -1,6 +1,6 @@
 namespace HexagonalArch.Domain.SeedWork;
 
-public interface IRepository<TEntity> where TEntity : IAggregateRoot
+public interface IRepository
 {
     IUnitOfWork UnitOfWork { get; }
 }

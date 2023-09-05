@@ -2,7 +2,7 @@ using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
-public class CollectedBalanceChallengeParticipation
+public class CollectedBalanceChallengeParticipation : Entity
 {
     public CollectedBalanceChallengeParticipation(
         Guid id,
@@ -26,7 +26,12 @@ public class CollectedBalanceChallengeParticipation
     public Guid TransactionId { get; }
     public decimal Amount { get; }
     public DateTime OccurredOn { get; }
+    public bool IsWinner { get; private set; } = false;
 
+    public void SetAsWinner()
+    {
+        IsWinner = true;
+    }
 
     public static Result<CollectedBalanceChallengeParticipation> Create(
         Guid id,

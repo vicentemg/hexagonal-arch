@@ -8,35 +8,47 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
 {
 
     private List<CollectedBalanceChallengeParticipation> _participations = new();
+
     CollectedBalanceChallenge(
         Guid id,
+        ChallengeName name,
         CollectedBalanceConstraint constraint,
-        DateTime createdDateTime) : base(id)
+        DateTime createdDateTime)
     {
-        CreatedDateTime = createdDateTime;
+        Id = id;
+        Name = name;
         Constraint = constraint;
-        AddDomainEvent(
-            new CollectedBalanceChallengeCreated(id)
-        );
+        CreatedDateTime = createdDateTime;
+
+        AddDomainEvent(new CollectedBalanceChallengeCreated(id));
 
     }
+
+    public Guid Id { get; }
+    public ChallengeName Name { get; }
     public CollectedBalanceConstraint Constraint { get; }
-
     public DateTime CreatedDateTime { get; }
-
-    public bool Active { get; } = true;
-
+    public bool Active { get; }
     public IReadOnlyCollection<CollectedBalanceChallengeParticipation> Participations => _participations;
 
     public static Result<CollectedBalanceChallenge> Create(
         Guid id,
+        ChallengeName name,
         CollectedBalanceConstraint constraint,
         DateTime createdDateTime
         )
     {
-        var challenge = new CollectedBalanceChallenge(id, constraint, createdDateTime);
+        if (name == null)
+        {
+            return Result<CollectedBalanceChallenge>.Failure(new[] { "The challenge name is empty" });
+        }
 
-        return challenge;
+        if (constraint == null)
+        {
+            return Result<CollectedBalanceChallenge>.Failure(new[] { "The challenge constraint is null" });
+        }
+
+        return new CollectedBalanceChallenge(id, name, constraint, createdDateTime);
     }
 
     public Result<CollectedBalanceChallengeParticipation> AddParticipation(CollectedBalanceChallengeParticipation participation)
@@ -48,35 +60,44 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
             return Result<CollectedBalanceChallengeParticipation>.Failure(errors);
         }
 
-        var backwardDays = TimeSpan.FromDays(Constraint.BackwardDayPeriod);
-
-        var periodEnd = participation.OccurredOn;
-        var periodStart = periodEnd.Subtract(backwardDays);
-
-        var periodResult = Period.Create(periodStart, periodEnd);
+        var periodResult = GetPeriodFromParticipation(participation);
 
         if (!periodResult.IsSuccess)
         {
-            var errors = (string[])periodResult.Errors;
-            return Result<CollectedBalanceChallengeParticipation>.Failure(errors);
+            return Result<CollectedBalanceChallengeParticipation>.Failure(periodResult.Errors);
+        }
+
+        var participationsInRange = _participations
+            .Where(p => participation.UserId.Equals(p.UserId)
+                && periodResult.Value.InRage(p.OccurredOn)
+            );
+
+        if (participationsInRange.Any(p => p.IsWinner)
+            || participation.OccurredOn < CreatedDateTime)
+        {
+            return participation;
         }
 
         _participations.Add(participation);
 
-        var collectedBalance = _participations
-            .Where(p =>
-                participation.UserId.Equals(p.UserId)
-                && periodResult.Value.InRage(p.OccurredOn)
-            )
-            .Sum(p => p.Amount);
+        var collectedBalance = participationsInRange.Sum(p => p.Amount);
 
         if (collectedBalance >= Constraint.Amount)
         {
+            participation.SetAsWinner();
             AddDomainEvent(new AccomplishedCollectedBalanceChallenge());
         }
 
         return participation;
     }
 
+    private Result<Period> GetPeriodFromParticipation(CollectedBalanceChallengeParticipation participation)
+    {
+        var backwardDays = TimeSpan.FromDays(Constraint.BackwardDayPeriod);
 
+        var periodEnd = participation.OccurredOn;
+        var periodStart = periodEnd.Subtract(backwardDays);
+
+        return Period.Create(periodStart, periodEnd);
+    }
 }

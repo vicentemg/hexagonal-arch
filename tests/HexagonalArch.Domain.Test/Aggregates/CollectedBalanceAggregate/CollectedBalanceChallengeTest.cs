@@ -1,19 +1,25 @@
 using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.Events;
+using HexagonalArch.Domain.Primitives;
 
 namespace HexagonalArch.Domain.Test.Aggregates.CollectedBalanceAggregate;
 
 public class CollectedBalanceChallengeTest
 {
+
     [Fact]
-    public void AddParticipation_WhenParticipationsAmountsAccumulatedReachConstraintAmout_ShouldAddAnAccomplishedChallengeEvent()
+    public void AddParticipation_WhenTheSumOfAllParticipationsReachsConstraintAmout_ShouldAddAnAccomplishedChallengeEvent()
     {
         //Arrange
-        var amount = 100m;
-        var backwardDays = 10;
-        var constraint = new CollectedBalanceConstraint(backwardDays, amount);
+        decimal amount = 100;
+        ushort backwardDays = 10;
+        var constraint = new CollectedBalanceConstraint(1, backwardDays, amount);
 
-        var challenge = CollectedBalanceChallenge.Create(Guid.NewGuid(), constraint, DateTime.Now).Value;
+        var challenge = CollectedBalanceChallenge.Create(
+            Guid.NewGuid(),
+            ChallengeName.Create("ChallengeName"),
+            constraint,
+            DateTime.Now).Value;
 
         var userId = Guid.NewGuid();
 
@@ -40,12 +46,99 @@ public class CollectedBalanceChallengeTest
         //Assert
         Assert.True(participationOneResult.IsSuccess);
         Assert.True(participationTwoResult.IsSuccess);
+
         Assert.Collection(
             challenge.DomainEvents,
             _ => { },
             @event => Assert.IsType<AccomplishedCollectedBalanceChallenge>(@event)
         );
 
+        Assert.Collection(
+            challenge.Participations,
+            participationOne => Assert.False(participationOne.IsWinner),
+            participationTwo => Assert.True(participationTwo.IsWinner)
+        );
+    }
+
+    [Fact]
+    public void AddParticipation_WhenAChallengeHasBeenAccomplishedDuringItsPeriod_ShouldNotAddTransaction()
+    {
+        //Arrange
+        decimal amount = 100;
+        ushort backwardDays = 10;
+        var constraint = new CollectedBalanceConstraint(1, backwardDays, amount);
+
+        var challenge = CollectedBalanceChallenge.Create(
+            Guid.NewGuid(),
+            ChallengeName.Create("ChallengeName"),
+            constraint,
+            DateTime.Now).Value;
+
+        var userId = Guid.NewGuid();
+
+        var winnerPaticipation = CollectedBalanceChallengeParticipation.Create(
+            Guid.NewGuid(),
+            userId,
+            challenge.Id,
+            Guid.NewGuid(),
+            100.5m,
+            DateTime.Now).Value;
+
+        var participationToBeOmitted = CollectedBalanceChallengeParticipation.Create(
+            Guid.NewGuid(),
+            userId,
+            challenge.Id,
+            Guid.NewGuid(),
+            90.5m,
+            DateTime.Now).Value;
+
+        var winnerResult = challenge.AddParticipation(winnerPaticipation);
+        //Act
+        var omittedResult = challenge.AddParticipation(participationToBeOmitted);
+
+        //Assert
+        Assert.True(winnerResult.IsSuccess);
+        Assert.True(omittedResult.IsSuccess);
+
+        Assert.Collection(
+            challenge.Participations,
+            winner => Assert.True(winner.IsWinner)
+        );
+    }
+
+    [Fact]
+    public void AddParticipation_WhenTryingToAddAParticipationWithDateBeforeChallengeCreation_ShouldNotAddTransaction()
+    {
+        //Arrange
+        decimal amount = 100;
+        ushort backwardDays = 10;
+        var constraint = new CollectedBalanceConstraint(1, backwardDays, amount);
+        var challengeCreatedOn = DateTime.Now;
+
+        var challenge = CollectedBalanceChallenge.Create(
+            Guid.NewGuid(),
+            ChallengeName.Create("ChallengeName"),
+            constraint,
+            challengeCreatedOn).Value;
+
+        var userId = Guid.NewGuid();
+
+        var participationDate = challengeCreatedOn.Subtract(TimeSpan.FromHours(3));
+
+        var participationToBeOmitted = CollectedBalanceChallengeParticipation.Create(
+            Guid.NewGuid(),
+            userId,
+            challenge.Id,
+            Guid.NewGuid(),
+            90.5m,
+            participationDate).Value;
+
+        //Act
+        var omittedResult = challenge.AddParticipation(participationToBeOmitted);
+
+        //Assert
+        Assert.True(omittedResult.IsSuccess);
+
+        Assert.Empty(challenge.Participations);
     }
 }
-

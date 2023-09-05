@@ -2,7 +2,7 @@
 
 namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
-public interface ICollectedBalanceChallengeRepository : IRepository<CollectedBalanceChallenge>
+public interface ICollectedBalanceChallengeRepository : IRepository
 {
-
+    Task<IList<CollectedBalanceChallenge>> GetChallengesByUserId(Guid userId);
 }
