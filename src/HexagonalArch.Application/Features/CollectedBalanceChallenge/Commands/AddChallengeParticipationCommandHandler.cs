@@ -6,14 +6,14 @@ using MediatR;
 
 namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 
-public class AddAmountParticipationCommandHandler : IRequestHandler<AddAmountParticipationCommand, Result<AddAmountParticipationCommand.Response>>
+public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChallengeParticipationCommand, Result<AddChallengeParticipationCommand.Response>>
 {
     private readonly IGuidProvider _guidProvider;
     private readonly ICollectedBalanceChallengeRepository _repository;
-    private readonly ILogger<AddAmountParticipationCommandHandler> _logger;
-    public AddAmountParticipationCommandHandler(
+    private readonly ILogger<AddChallengeParticipationCommandHandler> _logger;
+    public AddChallengeParticipationCommandHandler(
         ICollectedBalanceChallengeRepository repository,
-        ILogger<AddAmountParticipationCommandHandler> logger,
+        ILogger<AddChallengeParticipationCommandHandler> logger,
         IGuidProvider guidProvider)
     {
         _logger = logger;
@@ -21,7 +21,7 @@ public class AddAmountParticipationCommandHandler : IRequestHandler<AddAmountPar
         _guidProvider = guidProvider;
     }
 
-    public async Task<Result<AddAmountParticipationCommand.Response>> Handle(AddAmountParticipationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AddChallengeParticipationCommand.Response>> Handle(AddChallengeParticipationCommand request, CancellationToken cancellationToken)
     {
         var newParticipations = new List<Guid>();
 
@@ -44,7 +44,7 @@ public class AddAmountParticipationCommandHandler : IRequestHandler<AddAmountPar
 
             if (!result.IsSuccess)
             {
-                return Result<AddAmountParticipationCommand.Response>.Failure(result.Errors);
+                return Result<AddChallengeParticipationCommand.Response>.Failure(result.Errors);
             }
 
             newParticipations.Add(newParticipationId);
@@ -53,6 +53,6 @@ public class AddAmountParticipationCommandHandler : IRequestHandler<AddAmountPar
         var unitOfWork = _repository.UnitOfWork;
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new AddAmountParticipationCommand.Response(newParticipations);
+        return new AddChallengeParticipationCommand.Response(newParticipations);
     }
 }

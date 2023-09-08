@@ -9,16 +9,16 @@ using Aggregates = HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggr
 
 namespace HexagonalArch.Application.Test.Features.CollectedBalanceChallenge.Commands;
 
-public class AddAmountParticipationCommandHandlerTest
+public class AddChallengeParticipationCommandHandlerTest
 {
-    private readonly AddAmountParticipationCommandHandler _sut;
+    private readonly AddChallengeParticipationCommandHandler _sut;
 
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
     private readonly Mock<IGuidProvider> _guidProviderMock;
     private readonly Mock<ICollectedBalanceChallengeRepository> _repositoryMock;
-    private readonly Mock<ILogger<AddAmountParticipationCommandHandler>> _loggerMock;
+    private readonly Mock<ILogger<AddChallengeParticipationCommandHandler>> _loggerMock;
 
-    public AddAmountParticipationCommandHandlerTest()
+    public AddChallengeParticipationCommandHandlerTest()
     {
         _unitOfWorkMock = new Mock<IUnitOfWork>();
         _guidProviderMock = new Mock<IGuidProvider>();
@@ -28,9 +28,9 @@ public class AddAmountParticipationCommandHandlerTest
             .Setup(x => x.UnitOfWork)
             .Returns(_unitOfWorkMock.Object);
 
-        _loggerMock = new Mock<ILogger<AddAmountParticipationCommandHandler>>();
+        _loggerMock = new Mock<ILogger<AddChallengeParticipationCommandHandler>>();
 
-        _sut = new AddAmountParticipationCommandHandler(_repositoryMock.Object, _loggerMock.Object, _guidProviderMock.Object);
+        _sut = new AddChallengeParticipationCommandHandler(_repositoryMock.Object, _loggerMock.Object, _guidProviderMock.Object);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class AddAmountParticipationCommandHandlerTest
                 challengeTwo
             });
 
-        var command = new AddAmountParticipationCommand(userId,
+        var command = new AddChallengeParticipationCommand(userId,
                                                         Guid.NewGuid(),
                                                         partcipationAmount,
                                                         DateTime.Now);

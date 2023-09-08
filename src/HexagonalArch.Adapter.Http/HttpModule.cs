@@ -10,7 +10,7 @@ public static class HttpModule
     {
         app
          .MapGet("/", () => "Hello!");
-        
+
         return app;
     }
 }

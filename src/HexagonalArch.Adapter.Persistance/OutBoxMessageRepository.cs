@@ -6,7 +6,7 @@ using HexagonalArch.Application.Services;
 
 namespace HexagonalArch.Adapter.Persistance;
 
-public class OutBoxMessageRepository : IOutBoxMessageRepository
+public class OutBoxMessageRepository : IOutBoxMessageService
 {
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly IGuidProvider _guidProvider;

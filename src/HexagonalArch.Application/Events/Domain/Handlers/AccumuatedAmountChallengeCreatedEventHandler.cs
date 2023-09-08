@@ -8,23 +8,23 @@ namespace HexagonalArch.Application.Events.Domain.Handlers;
 
 public class AccumuatedAmountChallengeCreatedEventHandler : INotificationHandler<CollectedBalanceChallengeCreated>
 {
-    private readonly IOutBoxMessageRepository _integrationEventService;
+    private readonly IOutBoxMessageService _outBoxMessageService;
     private readonly IGuidProvider _guidProvider;
 
     public AccumuatedAmountChallengeCreatedEventHandler(
-        IOutBoxMessageRepository integrationEventService,
+        IOutBoxMessageService outBoxMessageService,
         IGuidProvider guidProvider)
     {
-        _integrationEventService = integrationEventService;
+        _outBoxMessageService = outBoxMessageService;
         _guidProvider = guidProvider;
     }
 
     public async Task Handle(CollectedBalanceChallengeCreated @event, CancellationToken cancellationToken)
     {
 
-        var integrationEvent = new PointsEarned(_guidProvider.NewId());
+        var integrationEvent = new EarnedPoints(_guidProvider.NewId());
 
-        await _integrationEventService.AddIntegrationEventAsync(integrationEvent, cancellationToken);
+        await _outBoxMessageService.AddIntegrationEventAsync(integrationEvent, cancellationToken);
         // return Task.CompletedTask;
     }
 }

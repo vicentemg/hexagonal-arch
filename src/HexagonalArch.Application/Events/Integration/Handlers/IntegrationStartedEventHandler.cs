@@ -2,9 +2,9 @@ using MediatR;
 
 namespace HexagonalArch.Application.Events.Integration.Handlers;
 
-public class IntegrationStartedEventHandler : INotificationHandler<PointsEarned>
+public class IntegrationStartedEventHandler : INotificationHandler<EarnedPoints>
 {
-    public Task Handle(PointsEarned @event, CancellationToken cancellationToken)
+    public Task Handle(EarnedPoints @event, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
