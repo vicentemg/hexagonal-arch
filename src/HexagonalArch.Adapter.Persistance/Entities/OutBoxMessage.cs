@@ -1,9 +1,24 @@
 namespace HexagonalArch.Adapter.Persistance.Entities;
 
-internal class OutBoxMessage
+public class OutBoxMessage
 {
-    public Guid Id { get; init; }
-    public DateTime OccurredOnUtcTime { get; init; }
-    public string Type { get; init; } = default!;
-    public string EventData { get; init; } = default!;
+    OutBoxMessage(
+        Guid id,
+        string type,
+        string eventData,
+        DateTime occurredOnUtcTime)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(type);
+        ArgumentException.ThrowIfNullOrEmpty(eventData);
+
+        Id = id;
+        Type = type;
+        EventData = eventData;
+        OccurredOnUtcTime = occurredOnUtcTime;
+    }
+
+    public Guid Id { get; private set; }
+    public string Type { get; private set; }
+    public string EventData { get; private set; }
+    public DateTime OccurredOnUtcTime { get; private set; }
 }

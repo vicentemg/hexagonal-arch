@@ -1,5 +1,4 @@
 ﻿using HexagonalArch.Domain.SeedWork;
-using MediatR;
 
 namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 

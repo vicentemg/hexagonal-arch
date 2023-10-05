@@ -2,7 +2,6 @@ using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Domain.SeedWork;
 using Microsoft.Extensions.Logging;
-using MediatR;
 
 namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 

@@ -1,7 +1,7 @@
 namespace HexagonalArch.Domain.SeedWork;
 public record Result<TValue>
 {
-    private readonly List<string> _errors;
+    private readonly List<string> _errors = new();
     private readonly TValue? _value;
     Result(TValue value)
     {
@@ -13,7 +13,7 @@ public record Result<TValue>
         _errors = errors.ToList();
     }
 
-    public TValue Value => _value;
+    public TValue? Value => _value;
 
     public IReadOnlyCollection<string> Errors => _errors;
 
@@ -25,10 +25,15 @@ public record Result<TValue>
 
     public static Result<TValue> Failure(IEnumerable<string> errors)
         => new(errors);
+    public static Result<TValue> Failure(string error)
+        => Failure(new[] { error });
 
     public static implicit operator Result<TValue>(TValue value)
         => Success(value);
 
     public static implicit operator TValue(Result<TValue> result)
-        => result.Value;
+    {
+        ArgumentNullException.ThrowIfNull(result.Value);
+        return result.Value;
+    }
 }

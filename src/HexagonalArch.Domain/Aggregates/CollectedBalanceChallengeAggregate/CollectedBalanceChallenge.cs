@@ -6,9 +6,7 @@ namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
 public class CollectedBalanceChallenge : Entity, IAggregateRoot
 {
-
     private List<CollectedBalanceChallengeParticipation> _participations = new();
-
     CollectedBalanceChallenge(
         Guid id,
         ChallengeName name,
@@ -38,14 +36,14 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
         DateTime createdDateTime
         )
     {
-        if (name == null)
+        if (name is null)
         {
-            return Result<CollectedBalanceChallenge>.Failure(new[] { "The challenge name is empty" });
+            return Result<CollectedBalanceChallenge>.Failure("The challenge name is empty");
         }
 
-        if (constraint == null)
+        if (constraint is null)
         {
-            return Result<CollectedBalanceChallenge>.Failure(new[] { "The challenge constraint is null" });
+            return Result<CollectedBalanceChallenge>.Failure("The challenge constraint is null");
         }
 
         return new CollectedBalanceChallenge(id, name, constraint, createdDateTime);
@@ -56,8 +54,7 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
 
         if (!participation.ChallengeId.Equals(Id))
         {
-            var errors = new[] { "Invalid challenge id associated" };
-            return Result<CollectedBalanceChallengeParticipation>.Failure(errors);
+            return Result<CollectedBalanceChallengeParticipation>.Failure("Invalid challenge id associated");
         }
 
         var periodResult = GetPeriodFromParticipation(participation);
@@ -69,7 +66,7 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
 
         var participationsInRange = _participations
             .Where(p => participation.UserId.Equals(p.UserId)
-                && periodResult.Value.InRage(p.OccurredOn)
+                && periodResult.Value!.InRage(p.OccurredOn)
             );
 
         if (participationsInRange.Any(p => p.IsWinner)

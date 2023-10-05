@@ -1,8 +1,7 @@
-using MediatR;
 
 namespace HexagonalArch.Application.Events.Integration;
 
-public interface IIntegrationEvent : INotification
+public interface IIntegrationEvent
 {
     Guid CorrelationId { get; }
 }

@@ -8,36 +8,37 @@ public class CollectedBalanceChallengeTest
 {
 
     [Fact]
-    public void AddParticipation_WhenTheSumOfAllParticipationsReachsConstraintAmout_ShouldAddAnAccomplishedChallengeEvent()
+    public void AddParticipation_WhenTheSumOfAllParticipationsReachesTheConstraintAmout_ShouldAddAnAccomplishedChallengeEvent()
     {
         //Arrange
         decimal amount = 100;
         ushort backwardDays = 10;
-        var constraint = new CollectedBalanceConstraint(1, backwardDays, amount);
+        var constraint = CollectedBalanceConstraint.Create(backwardDays, amount);
 
         var challenge = CollectedBalanceChallenge.Create(
             Guid.NewGuid(),
             ChallengeName.Create("ChallengeName"),
             constraint,
-            DateTime.Now).Value;
+            DateTime.Now)!.Value;
 
+        var challengeId = challenge!.Id;
         var userId = Guid.NewGuid();
 
         var participationOne = CollectedBalanceChallengeParticipation.Create(
             Guid.NewGuid(),
             userId,
-            challenge.Id,
+            challengeId,
             Guid.NewGuid(),
             10.5m,
-            DateTime.Now).Value;
+            DateTime.Now).Value!;
 
         var participationTwo = CollectedBalanceChallengeParticipation.Create(
             Guid.NewGuid(),
             userId,
-            challenge.Id,
+            challengeId,
             Guid.NewGuid(),
             90.5m,
-            DateTime.Now).Value;
+            DateTime.Now).Value!;
 
         //Act
         var participationOneResult = challenge.AddParticipation(participationOne);
@@ -66,7 +67,7 @@ public class CollectedBalanceChallengeTest
         //Arrange
         decimal amount = 100;
         ushort backwardDays = 10;
-        var constraint = new CollectedBalanceConstraint(1, backwardDays, amount);
+        var constraint = CollectedBalanceConstraint.Create(backwardDays, amount);
 
         var challenge = CollectedBalanceChallenge.Create(
             Guid.NewGuid(),
@@ -79,18 +80,18 @@ public class CollectedBalanceChallengeTest
         var winnerPaticipation = CollectedBalanceChallengeParticipation.Create(
             Guid.NewGuid(),
             userId,
-            challenge.Id,
+            challenge!.Id,
             Guid.NewGuid(),
             100.5m,
-            DateTime.Now).Value;
+            DateTime.Now).Value!;
 
         var participationToBeOmitted = CollectedBalanceChallengeParticipation.Create(
             Guid.NewGuid(),
             userId,
-            challenge.Id,
+            challenge!.Id,
             Guid.NewGuid(),
             90.5m,
-            DateTime.Now).Value;
+            DateTime.Now).Value!;
 
         var winnerResult = challenge.AddParticipation(winnerPaticipation);
         //Act
@@ -112,14 +113,14 @@ public class CollectedBalanceChallengeTest
         //Arrange
         decimal amount = 100;
         ushort backwardDays = 10;
-        var constraint = new CollectedBalanceConstraint(1, backwardDays, amount);
+        var constraint = CollectedBalanceConstraint.Create(backwardDays, amount);
         var challengeCreatedOn = DateTime.Now;
 
         var challenge = CollectedBalanceChallenge.Create(
             Guid.NewGuid(),
             ChallengeName.Create("ChallengeName"),
             constraint,
-            challengeCreatedOn).Value;
+            challengeCreatedOn).Value!;
 
         var userId = Guid.NewGuid();
 
@@ -131,7 +132,7 @@ public class CollectedBalanceChallengeTest
             challenge.Id,
             Guid.NewGuid(),
             90.5m,
-            participationDate).Value;
+            participationDate).Value!;
 
         //Act
         var omittedResult = challenge.AddParticipation(participationToBeOmitted);

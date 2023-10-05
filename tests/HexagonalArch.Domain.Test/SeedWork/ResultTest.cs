@@ -30,7 +30,7 @@ public class ResultTest
 
         //Assert
         Assert.NotNull(result.Value);
-        Assert.Null(result.Errors);
+        Assert.Empty(result.Errors);
         Assert.True(result.IsSuccess);
         Assert.Equal(valid, result.Value);
 
@@ -46,7 +46,7 @@ public class ResultTest
         Result<Valid> result = valid;
         //Assert
         Assert.NotNull(result);
-        Assert.Null(result.Errors);
+        Assert.Empty(result.Errors);
         Assert.NotNull(result.Value);
         Assert.True(result.IsSuccess);
     }

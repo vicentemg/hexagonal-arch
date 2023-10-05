@@ -79,7 +79,7 @@ public class AddChallengeParticipationCommandHandlerTest
         );
 
         Assert.Collection(
-            result.Value.ParticipationsIds,
+            result.Value!.ParticipationsIds,
             id => Assert.Equal(id, participationIdOne),
             id => Assert.Equal(id, participationIdTwo)
         );
@@ -93,7 +93,7 @@ public class AddChallengeParticipationCommandHandlerTest
     {
         var id = Guid.NewGuid();
         var challengeName = ChallengeName.Create(name);
-        var constraint = new CollectedBalanceConstraint(1, 10, amount);
+        var constraint = CollectedBalanceConstraint.Create(10, amount);
 
         return Aggregates.CollectedBalanceChallenge
             .Create(id, challengeName, constraint, DateTime.Now.AddHours(-1));

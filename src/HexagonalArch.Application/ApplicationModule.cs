@@ -1,3 +1,7 @@
+using System.Reflection;
+using HexagonalArch.Application.Events;
+using HexagonalArch.Application.Events.Domain;
+using HexagonalArch.Application.Events.Integration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HexagonalArch.Application;
@@ -8,6 +12,39 @@ public static class ApplicationModule
         var assembly = typeof(IApplicationAssemblyMarker).Assembly;
 
         return services
-               .AddMediatR(config => config.RegisterServicesFromAssemblies(assembly));
+            .AddEventHandlers(assembly)
+            .AddTransient<IIntegrationEventDispatcher, IntegrationEventDispatcher>()
+            .AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
+    }
+
+    internal static IServiceCollection AddEventHandlers(this IServiceCollection services, Assembly assembly)
+    {
+        var handlers = assembly
+        .GetTypes()
+        .Where(type =>
+            !type.IsAbstract && !type.IsInterface
+            && type.GetInterfaces()
+                .Any(@interface =>
+                @interface.IsGenericType
+                && (@interface.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)
+                || @interface.GetGenericTypeDefinition() == typeof(IIntegrationEventHandler<>))
+                )
+            );
+
+        foreach (var handlerImplementation in handlers)
+        {
+            var interfaceType = handlerImplementation
+                .GetInterfaces()
+                .FirstOrDefault(i => i.IsGenericType
+                    && (i.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)
+                    || i.GetGenericTypeDefinition() == typeof(IIntegrationEventHandler<>))
+                    );
+
+            if (interfaceType is null) continue;
+
+            services.AddTransient(interfaceType, handlerImplementation);
+        }
+
+        return services;
     }
 }

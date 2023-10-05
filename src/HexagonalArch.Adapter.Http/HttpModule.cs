@@ -1,4 +1,4 @@
-using HexagonalArch.Application;
+using HexagonalArch.Adapter.Http.Endpoints;
 public static class HttpModule
 {
     public static IServiceCollection ConfigureHttpAdapter(this IServiceCollection services)
@@ -8,8 +8,7 @@ public static class HttpModule
 
     public static WebApplication UseHttpAdapter(this WebApplication app)
     {
-        app
-         .MapGet("/", () => "Hello!");
+        app.MapChallgenParticipation();
 
         return app;
     }
