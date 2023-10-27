@@ -34,7 +34,7 @@ public class AddChallengeParticipationCommandHandlerTest
     }
 
     [Fact]
-    public async Task Handle_WhenThereAreMultpleChallengesToBeAddressed_ShouldCallAddParticipationForAllOfThem()
+    public async Task Handle_WhenThereAreMultipleChallengesToBeAddressed_ShouldCallAddParticipationForAllOfThem()
     {
         //Arrange
         var userId = Guid.NewGuid();
@@ -74,7 +74,7 @@ public class AddChallengeParticipationCommandHandlerTest
 
         Assert.Collection(
             participations,
-            p1 => Assert.Equal(p1.UserId, userId),
+            participationOne => Assert.Equal(participationOne.UserId, userId),
             p2 => Assert.Equal(p2.UserId, userId)
         );
 
@@ -95,7 +95,7 @@ public class AddChallengeParticipationCommandHandlerTest
         var challengeName = ChallengeName.Create(name);
         var constraint = CollectedBalanceConstraint.Create(10, amount);
 
-        return Aggregates.CollectedBalanceChallenge
-            .Create(id, challengeName, constraint, DateTime.Now.AddHours(-1));
+        var challenge = Aggregates.CollectedBalanceChallenge.Create(id, challengeName, constraint, DateTime.Now.AddHours(-1)).Value;
+        return challenge!;
     }
 }

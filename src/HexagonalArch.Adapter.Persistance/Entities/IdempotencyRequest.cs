@@ -11,7 +11,7 @@ public class IdempotencyRequest
         OccurredOnUtcTime = occurredOnUtcTime;
     }
 
-    public Guid Id { get; private set; }
-    public string Name { get; private set; }
-    public DateTime OccurredOnUtcTime { get; private set; }
+    public Guid Id { get; }
+    public string Name { get; }
+    public DateTime OccurredOnUtcTime { get; }
 }

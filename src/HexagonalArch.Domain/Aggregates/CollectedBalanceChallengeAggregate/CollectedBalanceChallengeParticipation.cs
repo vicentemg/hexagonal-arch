@@ -4,8 +4,7 @@ namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
 public class CollectedBalanceChallengeParticipation : Entity
 {
-    internal CollectedBalanceChallengeParticipation() { }
-    public CollectedBalanceChallengeParticipation(
+    CollectedBalanceChallengeParticipation(
         Guid id,
         Guid userId,
         Guid challengeId,
@@ -14,11 +13,11 @@ public class CollectedBalanceChallengeParticipation : Entity
         DateTime occurredOn)
     {
         Id = id;
-        Amount = amount;
         UserId = userId;
-        OccurredOn = occurredOn;
         ChallengeId = challengeId;
         TransactionId = transactionId;
+        Amount = amount;
+        OccurredOn = occurredOn;
     }
 
     public Guid Id { get; }
@@ -27,7 +26,7 @@ public class CollectedBalanceChallengeParticipation : Entity
     public Guid TransactionId { get; }
     public decimal Amount { get; }
     public DateTime OccurredOn { get; }
-    public bool IsWinner { get; private set; } = false;
+    public bool IsWinner { get; private set; }
 
     public void SetAsWinner()
     {

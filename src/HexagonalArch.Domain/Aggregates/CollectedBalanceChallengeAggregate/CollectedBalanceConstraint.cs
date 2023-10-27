@@ -11,7 +11,9 @@ public class CollectedBalanceConstraint : Entity
         Amount = amount;
         BackwardDayPeriod = backwardDayPeriod;
     }
-    public static Result<CollectedBalanceConstraint> Create(ushort backwardDayPeriod, decimal amount)
+    public static Result<CollectedBalanceConstraint> Create(
+        ushort backwardDayPeriod,
+        decimal amount)
     {
         if (amount <= 0)
         {
@@ -24,4 +26,5 @@ public class CollectedBalanceConstraint : Entity
     public int Id { get; }
     public ushort BackwardDayPeriod { get; }
     public decimal Amount { get; }
+    public Guid ChallengeId { get; private set; }
 }

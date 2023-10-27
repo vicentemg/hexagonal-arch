@@ -9,5 +9,20 @@ internal class OutboxMessageEntityConfiguration : IEntityTypeConfiguration<OutBo
     {
         builder
             .ToTable("OutBoxMessages");
+        
+        builder
+            .HasKey(e=>e.Id);
+
+        builder
+            .Property(e=>e.Type)
+            .IsRequired();
+        
+        builder
+            .Property(e => e.EventData)
+            .IsRequired();
+
+        builder
+            .Property(e => e.OccurredOnUtcTime)
+            .IsRequired();
     }
 }

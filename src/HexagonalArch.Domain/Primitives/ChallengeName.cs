@@ -17,7 +17,7 @@ public record ChallengeName(string Value)
         {
             return Result<ChallengeName>.Failure(new[] { "Characters exceeded" });
         }
-
+ 
         return new ChallengeName(value);
     }
 }

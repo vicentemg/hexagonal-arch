@@ -11,14 +11,19 @@ public class OutBoxMessage
         ArgumentException.ThrowIfNullOrEmpty(type);
         ArgumentException.ThrowIfNullOrEmpty(eventData);
 
+        if (id.Equals(Guid.Empty))
+        {
+            throw new InvalidDataException("Empty guid is not acceptable");
+        }
+
         Id = id;
         Type = type;
         EventData = eventData;
         OccurredOnUtcTime = occurredOnUtcTime;
     }
 
-    public Guid Id { get; private set; }
-    public string Type { get; private set; }
-    public string EventData { get; private set; }
-    public DateTime OccurredOnUtcTime { get; private set; }
+    public Guid Id { get; }
+    public string Type { get; }
+    public string EventData { get; }
+    public DateTime OccurredOnUtcTime { get; }
 }

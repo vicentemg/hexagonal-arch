@@ -9,5 +9,18 @@ internal class IdempotencyRequestEntityConfiguration : IEntityTypeConfiguration<
     {
         builder
             .ToTable("IdempotencyRequests");
+
+        builder
+            .HasKey(x => x.Id);
+
+        builder
+            .Property(e => e.Name)
+            .HasMaxLength(200)
+            .IsRequired();
+
+        builder
+            .Property(e => e.OccurredOnUtcTime)
+            .IsRequired();
+
     }
 }

@@ -20,7 +20,7 @@ public class CollectedBalanceChallengeTest
             ChallengeName.Create("ChallengeName"),
             constraint,
             DateTime.Now)!.Value;
-
+        
         var challengeId = challenge!.Id;
         var userId = Guid.NewGuid();
 
@@ -74,7 +74,7 @@ public class CollectedBalanceChallengeTest
             ChallengeName.Create("ChallengeName"),
             constraint,
             DateTime.Now).Value;
-
+        
         var userId = Guid.NewGuid();
 
         var winnerPaticipation = CollectedBalanceChallengeParticipation.Create(
