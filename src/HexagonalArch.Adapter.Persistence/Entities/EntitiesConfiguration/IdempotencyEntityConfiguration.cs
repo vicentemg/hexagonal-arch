@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HexagonalArch.Adapter.Persistance.Entities.EntitiesConfiguration;
+namespace HexagonalArch.Adapter.Persistence.Entities.EntitiesConfiguration;
 
 internal class IdempotencyRequestEntityConfiguration : IEntityTypeConfiguration<IdempotencyRequest>
 {
@@ -21,6 +21,5 @@ internal class IdempotencyRequestEntityConfiguration : IEntityTypeConfiguration<
         builder
             .Property(e => e.OccurredOnUtcTime)
             .IsRequired();
-
     }
 }

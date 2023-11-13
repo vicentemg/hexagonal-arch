@@ -1,8 +1,7 @@
-
-namespace HexagonalArch.Application.Events.Integration;
+namespace HexagonalArch.Application.Events;
 
 public interface IIntegrationEventHandler<TEvent>
-where TEvent : IIntegrationEvent
+    where TEvent : IIntegrationEvent
 {
     Task Handle(TEvent @event, CancellationToken cancellationToken);
 }

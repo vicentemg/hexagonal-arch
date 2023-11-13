@@ -1,4 +1,7 @@
 using HexagonalArch.Adapter.Http.Endpoints;
+
+namespace HexagonalArch.Adapter.Http;
+
 public static class HttpModule
 {
     public static IServiceCollection ConfigureHttpAdapter(this IServiceCollection services)
@@ -8,7 +11,7 @@ public static class HttpModule
 
     public static WebApplication UseHttpAdapter(this WebApplication app)
     {
-        app.MapChallgenParticipation();
+        app.MapChallengeParticipation();
 
         return app;
     }

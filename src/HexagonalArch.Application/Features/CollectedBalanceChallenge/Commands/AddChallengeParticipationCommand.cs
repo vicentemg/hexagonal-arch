@@ -8,5 +8,5 @@ public record class AddChallengeParticipationCommand(
     decimal Amount,
     DateTime OperationDateTime) : IRequest<Result<AddChallengeParticipationCommand.Response>>
 {
-    public record Response(IEnumerable<Guid> ParticipationsIds);
+    public record Response(IEnumerable<Guid> ParticipationIds);
 }

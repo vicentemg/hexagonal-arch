@@ -1,15 +1,13 @@
-using HexagonalArch.Application.Events.Domain;
+using HexagonalArch.Application.Events;
 using HexagonalArch.Domain.Events;
 using HexagonalArch.Domain.SeedWork;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 
 namespace HexagonalArch.Application.Test.Events.Domain;
 
 public class DomainEventDispatcherTest
 {
-
     [Fact]
     public async Task Dispatch_WhenEventParamIsNotIDomainEventType_ShouldThrowAnException()
     {
@@ -25,7 +23,6 @@ public class DomainEventDispatcherTest
         //Assert
         var exception = await Assert.ThrowsAsync<ArgumentException>(testCode);
         Assert.Equal(messageExpected, exception.Message);
-
     }
 
     [Fact]
@@ -38,7 +35,7 @@ public class DomainEventDispatcherTest
         var serviceProvider = new ServiceCollection()
             .AddTransient(
                 typeof(IDomainEventHandler<CollectedBalanceChallengeCreated>),
-                (sp) => handlerMock.Object)
+                sp => handlerMock.Object)
             .BuildServiceProvider();
 
         var eventDispatcher = new DomainEventDispatcher(serviceProvider);
@@ -60,7 +57,7 @@ public class DomainEventDispatcherTest
         var serviceProvider = new ServiceCollection()
             .AddTransient(
                 typeof(IDomainEventHandler<AccomplishedCollectedBalanceChallenge>),
-                (sp) => handlerMock.Object)
+                sp => handlerMock.Object)
             .BuildServiceProvider();
 
         var eventDispatcher = new DomainEventDispatcher(serviceProvider);

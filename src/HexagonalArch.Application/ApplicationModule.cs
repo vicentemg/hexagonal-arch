@@ -1,10 +1,9 @@
 using System.Reflection;
 using HexagonalArch.Application.Events;
-using HexagonalArch.Application.Events.Domain;
-using HexagonalArch.Application.Events.Integration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HexagonalArch.Application;
+
 public static class ApplicationModule
 {
     public static IServiceCollection ConfigureApplicationModule(this IServiceCollection services)
@@ -20,15 +19,16 @@ public static class ApplicationModule
     internal static IServiceCollection AddEventHandlers(this IServiceCollection services, Assembly assembly)
     {
         var handlers = assembly
-        .GetTypes()
-        .Where(type =>
-            !type.IsAbstract && !type.IsInterface
-            && type.GetInterfaces()
-                .Any(@interface =>
-                @interface.IsGenericType
-                && (@interface.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)
-                || @interface.GetGenericTypeDefinition() == typeof(IIntegrationEventHandler<>))
-                )
+            .GetTypes()
+            .Where(type =>
+                type is { IsAbstract: false, IsInterface: false }
+                && type.GetInterfaces()
+                    .Any(@interface =>
+                        @interface.IsGenericType
+                        && (@interface.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)
+                            || @interface.GetGenericTypeDefinition() ==
+                            typeof(IIntegrationEventHandler<>))
+                    )
             );
 
         foreach (var handlerImplementation in handlers)
@@ -36,9 +36,9 @@ public static class ApplicationModule
             var interfaceType = handlerImplementation
                 .GetInterfaces()
                 .FirstOrDefault(i => i.IsGenericType
-                    && (i.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)
-                    || i.GetGenericTypeDefinition() == typeof(IIntegrationEventHandler<>))
-                    );
+                                     && (i.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)
+                                         || i.GetGenericTypeDefinition() == typeof(IIntegrationEventHandler<>))
+                );
 
             if (interfaceType is null) continue;
 

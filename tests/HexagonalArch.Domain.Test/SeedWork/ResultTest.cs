@@ -1,13 +1,14 @@
 using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Domain.Test.SeedWork;
+
 public class ResultTest
 {
     [Fact]
     public void Given_ResultByValidClass_When_FailureIsCalled_Then_ErrorsMustNotBeEmptyAndValueShouldBeNull()
     {
         //Arrange
-        var errors = new string[] { "Error 1", "Error 2" };
+        var errors = new[] { "Error 1", "Error 2" };
 
         //Act
         var result = Result<Valid>.Failure(errors);
@@ -15,6 +16,23 @@ public class ResultTest
         //Assert
         Assert.Null(result.Value);
         Assert.Equal(errors, result.Errors);
+        Assert.NotEmpty(result.Errors);
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
+    public void
+        Given_ResultByValidClass_When_FailureIsCalledUsingSingleArg_Then_ErrorsMustNotBeEmptyAndValueShouldBeNull()
+    {
+        //Arrange
+        var error = "Error 1";
+
+        //Act
+        var result = Result<Valid>.Failure(error);
+
+        //Assert
+        Assert.Null(result.Value);
+        Assert.Contains(error, result.Errors);
         Assert.NotEmpty(result.Errors);
         Assert.False(result.IsSuccess);
     }
@@ -33,7 +51,6 @@ public class ResultTest
         Assert.Empty(result.Errors);
         Assert.True(result.IsSuccess);
         Assert.Equal(valid, result.Value);
-
     }
 
     [Fact]
@@ -51,7 +68,8 @@ public class ResultTest
         Assert.True(result.IsSuccess);
     }
 }
-class Valid
+
+internal class Valid
 {
     public string Message { get; } = default!;
 }

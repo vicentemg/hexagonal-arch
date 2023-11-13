@@ -1,15 +1,17 @@
-using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Application.Providers;
+using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.SeedWork;
 using Microsoft.Extensions.Logging;
 
 namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 
-public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChallengeParticipationCommand, Result<AddChallengeParticipationCommand.Response>>
+public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChallengeParticipationCommand,
+    Result<AddChallengeParticipationCommand.Response>>
 {
     private readonly IGuidProvider _guidProvider;
-    private readonly ICollectedBalanceChallengeRepository _repository;
     private readonly ILogger<AddChallengeParticipationCommandHandler> _logger;
+    private readonly ICollectedBalanceChallengeRepository _repository;
+
     public AddChallengeParticipationCommandHandler(
         ICollectedBalanceChallengeRepository repository,
         ILogger<AddChallengeParticipationCommandHandler> logger,
@@ -20,9 +22,10 @@ public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChalle
         _guidProvider = guidProvider;
     }
 
-    public async Task<Result<AddChallengeParticipationCommand.Response>> Handle(AddChallengeParticipationCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AddChallengeParticipationCommand.Response>> Handle(
+        AddChallengeParticipationCommand request, CancellationToken cancellationToken)
     {
-        var newParticipations = new List<Guid>();
+        var participationIds = new List<Guid>();
 
         var challenges = await _repository.GetChallengesByUserId(request.UserId);
 
@@ -31,27 +34,24 @@ public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChalle
             var newParticipationId = _guidProvider.NewId();
 
             var participation = CollectedBalanceChallengeParticipation.Create(
-                   newParticipationId,
-                   request.UserId,
-                   challenge.Id,
-                   request.TransactionId,
-                   request.Amount,
-                   request.OperationDateTime
-               );
+                newParticipationId,
+                request.UserId,
+                challenge.Id,
+                request.TransactionId,
+                request.Amount,
+                request.OperationDateTime
+            );
 
             var result = challenge.AddParticipation(participation);
 
-            if (!result.IsSuccess)
-            {
-                return Result<AddChallengeParticipationCommand.Response>.Failure(result.Errors);
-            }
+            if (!result.IsSuccess) return Result<AddChallengeParticipationCommand.Response>.Failure(result.Errors);
 
-            newParticipations.Add(newParticipationId);
+            participationIds.Add(newParticipationId);
         }
 
         var unitOfWork = _repository.UnitOfWork;
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new AddChallengeParticipationCommand.Response(newParticipations);
+        return new AddChallengeParticipationCommand.Response(participationIds);
     }
 }

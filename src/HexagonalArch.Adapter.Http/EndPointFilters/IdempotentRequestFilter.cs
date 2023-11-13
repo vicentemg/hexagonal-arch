@@ -2,7 +2,7 @@ using HexagonalArch.Adapter.Http.Contexts;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Application.Services;
 
-namespace HexagonalArch.Adapter.Http.Middlewares;
+namespace HexagonalArch.Adapter.Http.EndPointFilters;
 
 public class IdempotentRequestFilter : IEndpointFilter
 {
@@ -24,26 +24,20 @@ public class IdempotentRequestFilter : IEndpointFilter
 
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
-
         var headerCorrelationId = _httpHeaderContext.GetValue(IdempotencyKeyHeader);
 
         if (string.IsNullOrEmpty(headerCorrelationId)
-            || !Guid.TryParse(headerCorrelationId, out Guid correlationId))
-        {
-
+            || !Guid.TryParse(headerCorrelationId, out var correlationId))
             return Results.Problem(
-                detail: $"Invalid value for header {headerCorrelationId}",
+                $"Invalid value for header {headerCorrelationId}",
                 statusCode: StatusCodes.Status400BadRequest
             );
-        }
 
         if (await _idempotencyService.HasBeenProcessed(correlationId))
-        {
             return Results.Problem(
-                detail: $"The request id:{correlationId} has been already processed",
+                $"The request id:{correlationId} has been already processed",
                 statusCode: StatusCodes.Status403Forbidden
             );
-        }
 
         var pathRequest = context.HttpContext.Request.Path;
         var cancellationToken = context.HttpContext.RequestAborted;

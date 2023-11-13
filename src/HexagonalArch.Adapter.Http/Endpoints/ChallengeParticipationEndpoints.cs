@@ -1,13 +1,8 @@
-using HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
-using HexagonalArch.Application.Features.CollectedBalanceChallenge.Queries;
-
 namespace HexagonalArch.Adapter.Http.Endpoints;
 
 internal static class ChallengeParticipationEndpoints
 {
-    private const string EndPoint = "api/challenge-participation";
-
-    internal static WebApplication MapChallgenParticipation(this WebApplication app)
+    internal static WebApplication MapChallengeParticipation(this WebApplication app)
     {
         // app.MapGet($"{EndPoint}/{{id}}", GetChallengeParticipation);
         // app.MapPost(EndPoint, AddParticipation);

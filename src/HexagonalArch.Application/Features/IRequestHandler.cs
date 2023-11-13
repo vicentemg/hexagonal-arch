@@ -1,7 +1,7 @@
-namespace HexagonalArch.Application;
+namespace HexagonalArch.Application.Features;
 
 public interface IRequestHandler<TRequest, TResponse>
-where TRequest : IRequest<TResponse>
+    where TRequest : IRequest<TResponse>
 {
     Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 }

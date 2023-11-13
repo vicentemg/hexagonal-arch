@@ -1,8 +1,8 @@
-namespace HexagonalArch.Adapter.Persistance.Entities;
+namespace HexagonalArch.Adapter.Persistence.Entities;
 
 public class IdempotencyRequest
 {
-    IdempotencyRequest(Guid id, string name, DateTime occurredOnUtcTime)
+    private IdempotencyRequest(Guid id, string name, DateTime occurredOnUtcTime)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
 

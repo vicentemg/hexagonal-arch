@@ -7,5 +7,4 @@ public interface IDomainEventDispatcher
 
 public interface IIntegrationEventDispatcher : IDomainEventDispatcher
 {
-
 }

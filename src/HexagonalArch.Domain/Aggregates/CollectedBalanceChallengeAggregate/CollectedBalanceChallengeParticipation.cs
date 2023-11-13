@@ -4,7 +4,7 @@ namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
 public class CollectedBalanceChallengeParticipation : Entity
 {
-    CollectedBalanceChallengeParticipation(
+    private CollectedBalanceChallengeParticipation(
         Guid id,
         Guid userId,
         Guid challengeId,

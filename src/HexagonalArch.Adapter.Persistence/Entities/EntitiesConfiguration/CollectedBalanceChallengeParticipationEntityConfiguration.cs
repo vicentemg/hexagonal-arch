@@ -1,15 +1,17 @@
+using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
-namespace HexagonalArch.Adapter.Persistance.Entities.EntitiesConfiguration;
+namespace HexagonalArch.Adapter.Persistence.Entities.EntitiesConfiguration;
 
-public class CollectedBalanceChallengeParticipationEntityConfiguration : IEntityTypeConfiguration<CollectedBalanceChallengeParticipation>
+public class
+    CollectedBalanceChallengeParticipationEntityConfiguration : IEntityTypeConfiguration<
+        CollectedBalanceChallengeParticipation>
 {
     public void Configure(EntityTypeBuilder<CollectedBalanceChallengeParticipation> builder)
     {
         builder.HasKey(e => e.Id);
-        
+
         builder
             .Property(e => e.IsWinner)
             .IsRequired();

@@ -1,7 +1,6 @@
-﻿using MassTransit;
+﻿using HexagonalArch.Application;
+using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-
-using HexagonalArch.Application;
 
 namespace HexagonalArch.Adapter.BusProcess;
 
@@ -18,14 +17,10 @@ public static class BusProcessModule
 
     private static IServiceCollection AddMassTransit(this IServiceCollection services)
     {
-
         return services
             .AddMassTransit(options =>
             {
-                options.UsingRabbitMq((context, cfg) =>
-                    {
-                        cfg.ConfigureEndpoints(context);
-                    });
+                options.UsingRabbitMq((context, cfg) => { cfg.ConfigureEndpoints(context); });
             });
     }
 }

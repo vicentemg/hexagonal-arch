@@ -1,6 +1,5 @@
-﻿namespace HexagonalArch.Application;
+﻿namespace HexagonalArch.Application.Features;
 
 public interface IRequest<TResponse>
 {
-
 }

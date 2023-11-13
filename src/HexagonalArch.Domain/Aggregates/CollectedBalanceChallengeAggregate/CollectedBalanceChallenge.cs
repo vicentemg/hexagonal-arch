@@ -1,5 +1,4 @@
-﻿using System.Data;
-using HexagonalArch.Domain.Events;
+﻿using HexagonalArch.Domain.Events;
 using HexagonalArch.Domain.Primitives;
 using HexagonalArch.Domain.SeedWork;
 
@@ -7,9 +6,9 @@ namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
 public class CollectedBalanceChallenge : Entity, IAggregateRoot
 {
-    private List<CollectedBalanceChallengeParticipation> _participations = new();
-    
-    CollectedBalanceChallenge(
+    private readonly List<CollectedBalanceChallengeParticipation> _participations = new();
+
+    private CollectedBalanceChallenge(
         Guid id,
         ChallengeName name,
         DateTime createdDateTime)
@@ -19,81 +18,66 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
         CreatedDateTime = createdDateTime;
     }
 
-    CollectedBalanceChallenge(
+    private CollectedBalanceChallenge(
         Guid id,
         ChallengeName name,
         CollectedBalanceConstraint collectedBalanceConstraint,
         DateTime createdDateTime) : this(id, name, createdDateTime)
     {
-        
         CollectedBalanceConstraint = collectedBalanceConstraint;
         AddDomainEvent(new CollectedBalanceChallengeCreated(id));
-
     }
 
     public Guid Id { get; }
     public ChallengeName Name { get; }
     public CollectedBalanceConstraint CollectedBalanceConstraint { get; init; }
     public DateTime CreatedDateTime { get; }
-    public bool Active { get; private set; }
-    
+    public bool Active { get; } = false;
+
     public IReadOnlyCollection<CollectedBalanceChallengeParticipation> Participations => _participations;
 
     public static Result<CollectedBalanceChallenge> Create(
         Guid id,
-        ChallengeName name,
-        CollectedBalanceConstraint constraint,
+        ChallengeName? name,
+        CollectedBalanceConstraint? constraint,
         DateTime createdDateTime
-        )
+    )
     {
-         if (constraint is null)
-        {
-            return Result<CollectedBalanceChallenge>.Failure("The challenge constraint is null");
-        }
+        if (constraint is null) return Result<CollectedBalanceChallenge>.Failure("The challenge constraint is null");
 
-        if (name is null)
-        {
-            return Result<CollectedBalanceChallenge>.Failure("The challenge name is empty");
-        }
+        if (name is null) return Result<CollectedBalanceChallenge>.Failure("The challenge name is empty");
 
 
         return new CollectedBalanceChallenge(id, name, constraint, createdDateTime);
     }
 
-    public Result<CollectedBalanceChallengeParticipation> AddParticipation(CollectedBalanceChallengeParticipation participation)
+    public Result<CollectedBalanceChallengeParticipation> AddParticipation(
+        CollectedBalanceChallengeParticipation participation)
     {
-
         if (!participation.ChallengeId.Equals(Id))
-        {
             return Result<CollectedBalanceChallengeParticipation>.Failure("Invalid challenge id associated");
-        }
 
         var periodResult = GetPeriodFromParticipation(participation);
 
-        if (!periodResult.IsSuccess)
-        {
-            return Result<CollectedBalanceChallengeParticipation>.Failure(periodResult.Errors);
-        }
+        if (!periodResult.IsSuccess) return Result<CollectedBalanceChallengeParticipation>.Failure(periodResult.Errors);
 
-        var participationsInRange = _participations
+        var inRangeParticipations = _participations
             .Where(p => participation.UserId.Equals(p.UserId)
-                && periodResult.Value!.InRage(p.OccurredOn)
+                        && periodResult.Value!.InRage(p.OccurredOn)
             );
 
-        if (participationsInRange.Any(p => p.IsWinner)
+        if (inRangeParticipations.Any(p => p.IsWinner)
             || participation.OccurredOn < CreatedDateTime)
-        {
             return participation;
-        }
 
         _participations.Add(participation);
 
-        var collectedBalance = participationsInRange.Sum(p => p.Amount);
+        var collectedBalance = inRangeParticipations.Sum(p => p.Amount);
 
         if (collectedBalance >= CollectedBalanceConstraint.Amount)
         {
             participation.SetAsWinner();
-            AddDomainEvent(new AccomplishedCollectedBalanceChallenge());
+            AddDomainEvent(new AccomplishedCollectedBalanceChallenge(Id, participation.UserId));
         }
 
         return participation;

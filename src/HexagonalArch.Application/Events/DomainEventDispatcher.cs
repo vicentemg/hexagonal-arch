@@ -1,11 +1,12 @@
 using HexagonalArch.Domain.SeedWork;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HexagonalArch.Application.Events.Domain;
+namespace HexagonalArch.Application.Events;
 
 public class DomainEventDispatcher : IDomainEventDispatcher
 {
     private readonly IServiceProvider _serviceProvider;
+
     public DomainEventDispatcher(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
@@ -16,9 +17,7 @@ public class DomainEventDispatcher : IDomainEventDispatcher
         var eventType = @event.GetType();
 
         if (!eventType.IsAssignableTo(typeof(IDomainEvent)))
-        {
             throw new ArgumentException($"{eventType} is not type of {typeof(IDomainEvent)}");
-        }
 
         var handlers = GetHandlers(eventType);
 
@@ -51,5 +50,4 @@ public class DomainEventDispatcher : IDomainEventDispatcher
 
         return task;
     }
-
 }

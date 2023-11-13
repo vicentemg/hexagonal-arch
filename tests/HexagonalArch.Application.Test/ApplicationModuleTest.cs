@@ -1,4 +1,4 @@
-using HexagonalArch.Application.Events.Domain;
+using HexagonalArch.Application.Events;
 using HexagonalArch.Domain.Events;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +22,8 @@ public class ApplicationModuleTest
             services,
             serviceDescriptor =>
             {
-                Assert.Equal(typeof(IDomainEventHandler<CollectedBalanceChallengeCreated>), serviceDescriptor.ServiceType);
+                Assert.Equal(typeof(IDomainEventHandler<CollectedBalanceChallengeCreated>),
+                    serviceDescriptor.ServiceType);
                 Assert.Equal(typeof(HandlerOne), serviceDescriptor.ImplementationType);
             });
     }

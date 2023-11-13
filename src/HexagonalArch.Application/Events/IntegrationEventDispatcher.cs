@@ -1,7 +1,6 @@
-
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HexagonalArch.Application.Events.Integration;
+namespace HexagonalArch.Application.Events;
 
 public class IntegrationEventDispatcher : IIntegrationEventDispatcher
 {
@@ -17,9 +16,7 @@ public class IntegrationEventDispatcher : IIntegrationEventDispatcher
         var eventType = @event.GetType();
 
         if (!eventType.IsAssignableTo(typeof(IIntegrationEvent)))
-        {
             throw new ArgumentException($"{eventType} is not type of {typeof(IIntegrationEvent)}");
-        }
 
         var handlers = GetHandlers(eventType);
 
@@ -30,7 +27,7 @@ public class IntegrationEventDispatcher : IIntegrationEventDispatcher
             await handleTask.ConfigureAwait(false);
         }
     }
-    
+
     private IEnumerable<object> GetHandlers(Type eventTYpe)
     {
         var handlerType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventTYpe);

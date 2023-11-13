@@ -33,11 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonlArch.Adapter.BusPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Cache.Test", "tests\HexagonalArch.Adapter.Cache.Test\HexagonalArch.Adapter.Cache.Test.csproj", "{142C6441-2437-4340-AF49-403AF6785340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Persistance.Test", "tests\HexagonalArch.Adapter.Persistance.Test\HexagonalArch.Adapter.Persistance.Test.csproj", "{B4AADC13-04FA-4DCB-BB7A-24804605AF4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Persistence.Test", "tests\HexagonalArch.Adapter.Persistence.Test\HexagonalArch.Adapter.Persistence.Test.csproj", "{B4AADC13-04FA-4DCB-BB7A-24804605AF4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Cache", "src\HexagonalArch.Adapter.Cache\HexagonalArch.Adapter.Cache.csproj", "{0BECF84A-B0A0-4127-92DA-24E1C6671FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Persistance", "src\HexagonalArch.Adapter.Persistance\HexagonalArch.Adapter.Persistance.csproj", "{B10EA37D-D0A7-4757-A69E-422C68B4C4AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Persistence", "src\HexagonalArch.Adapter.Persistence\HexagonalArch.Adapter.Persistence.csproj", "{B10EA37D-D0A7-4757-A69E-422C68B4C4AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

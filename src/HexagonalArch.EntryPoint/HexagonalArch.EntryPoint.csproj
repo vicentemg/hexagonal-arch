@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HexagonalArch.Adapter.Http\HexagonalArch.Adapter.Http.csproj" />
     <ProjectReference Include="..\HexagonalArch.Application\HexagonalArch.Application.csproj" />
-    <ProjectReference Include="..\HexagonalArch.Adapter.Persistance\HexagonalArch.Adapter.Persistance.csproj" />
+    <ProjectReference Include="..\HexagonalArch.Adapter.Persistence\HexagonalArch.Adapter.Persistence.csproj" />
     <ProjectReference Include="..\HexagonalArch.Adapter.Cache\HexagonalArch.Adapter.Cache.csproj" />
   </ItemGroup>
 

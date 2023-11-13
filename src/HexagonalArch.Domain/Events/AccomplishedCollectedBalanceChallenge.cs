@@ -2,6 +2,6 @@ using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Domain.Events;
 
-public class AccomplishedCollectedBalanceChallenge : IDomainEvent
+public record AccomplishedCollectedBalanceChallenge(Guid ChallengeId, Guid UserId) : IDomainEvent
 {
 }

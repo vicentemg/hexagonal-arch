@@ -1,5 +1,6 @@
 ﻿using HexagonalArch.Adapter.Cache;
-using HexagonalArch.Adapter.Persistance;
+using HexagonalArch.Adapter.Http;
+using HexagonalArch.Adapter.Persistence;
 using HexagonalArch.Application;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,7 @@ builder.Services
     .ConfigureApplicationModule()
     .ConfigureHttpAdapter()
     .ConfigureCacheAdapter()
-    .ConfigurePersistanceAdapter();
+    .ConfigurePersistenceAdapter();
 
 var app = builder.Build();
 

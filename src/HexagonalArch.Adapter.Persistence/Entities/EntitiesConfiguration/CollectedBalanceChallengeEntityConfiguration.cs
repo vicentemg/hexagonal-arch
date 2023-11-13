@@ -3,7 +3,8 @@ using HexagonalArch.Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HexagonalArch.Adapter.Persistance.Entities.EntitiesConfiguration;
+namespace HexagonalArch.Adapter.Persistence.Entities.EntitiesConfiguration;
+
 public class CollectedBalanceChallengeEntityConfiguration : IEntityTypeConfiguration<CollectedBalanceChallenge>
 {
     public void Configure(EntityTypeBuilder<CollectedBalanceChallenge> builder)
@@ -31,6 +32,5 @@ public class CollectedBalanceChallengeEntityConfiguration : IEntityTypeConfigura
             .HasMany(x => x.Participations)
             .WithOne()
             .HasForeignKey(x => x.Id);
-
     }
 }

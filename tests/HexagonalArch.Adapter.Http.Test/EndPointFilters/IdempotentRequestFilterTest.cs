@@ -1,5 +1,5 @@
 using HexagonalArch.Adapter.Http.Contexts;
-using HexagonalArch.Adapter.Http.Middlewares;
+using HexagonalArch.Adapter.Http.EndPointFilters;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Application.Services;
 using Microsoft.AspNetCore.Http;
@@ -23,8 +23,8 @@ public class IdempotentRequestFilterTest
         _idempontcyServiceMock = new Mock<IIdempotencyService>();
 
         _sut = new IdempotentRequestFilter(_idempontcyServiceMock.Object,
-                                          _dateTimeProviderMock.Object,
-                                          _httpHeaderContextMock.Object);
+            _dateTimeProviderMock.Object,
+            _httpHeaderContextMock.Object);
     }
 
     [Theory]
@@ -49,7 +49,8 @@ public class IdempotentRequestFilterTest
 
         _httpHeaderContextMock.Verify(m => m.GetValue(IdempotentRequestFilter.IdempotencyKeyHeader), Times.Once);
         _idempontcyServiceMock.Verify(m => m.HasBeenProcessed(It.IsAny<Guid>()), Times.Never);
-        _idempontcyServiceMock.Verify(m => m.AddRequestAsync(It.IsAny<IdempotentRequest>(), It.IsAny<CancellationToken>()), Times.Never);
+        _idempontcyServiceMock.Verify(
+            m => m.AddRequestAsync(It.IsAny<IdempotentRequest>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
@@ -78,7 +79,8 @@ public class IdempotentRequestFilterTest
 
         _httpHeaderContextMock.Verify(m => m.GetValue(IdempotentRequestFilter.IdempotencyKeyHeader), Times.Once);
         _idempontcyServiceMock.Verify(m => m.HasBeenProcessed(alreadyProcessedkey), Times.Once);
-        _idempontcyServiceMock.Verify(m => m.AddRequestAsync(It.IsAny<IdempotentRequest>(), It.IsAny<CancellationToken>()), Times.Never);
+        _idempontcyServiceMock.Verify(
+            m => m.AddRequestAsync(It.IsAny<IdempotentRequest>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
 
@@ -119,14 +121,14 @@ public class IdempotentRequestFilterTest
 
         //Assert
         _httpHeaderContextMock.Verify(m => m.GetValue(IdempotentRequestFilter.IdempotencyKeyHeader), Times.Once);
-        
+
         _idempontcyServiceMock.Verify(m => m.HasBeenProcessed(idempotencyKey), Times.Once);
         _idempontcyServiceMock.Verify(m =>
-            m.AddRequestAsync(It.Is<IdempotentRequest>(x =>
-                x.Id.Equals(idempotencyKey)
-                && x.SourceName.Equals("/api/resource", StringComparison.OrdinalIgnoreCase)
-                && x.DateTime.Equals(now)),
-                token),
+                m.AddRequestAsync(It.Is<IdempotentRequest>(x =>
+                        x.Id.Equals(idempotencyKey)
+                        && x.SourceName.Equals("/api/resource", StringComparison.OrdinalIgnoreCase)
+                        && x.DateTime.Equals(now)),
+                    token),
             Times.Once);
 
         nextMock.Verify(m => m.Invoke(endPointContext.Object), Times.Once);

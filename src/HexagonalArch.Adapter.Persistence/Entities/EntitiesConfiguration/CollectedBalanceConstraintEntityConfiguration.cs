@@ -2,7 +2,7 @@ using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HexagonalArch.Adapter.Persistance.Entities.EntitiesConfiguration;
+namespace HexagonalArch.Adapter.Persistence.Entities.EntitiesConfiguration;
 
 public class CollectedBalanceConstraintEntityConfiguration : IEntityTypeConfiguration<CollectedBalanceConstraint>
 {

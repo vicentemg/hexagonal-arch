@@ -1,6 +1,5 @@
 using HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 using HexagonalArch.Application.Providers;
-using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.Primitives;
 using HexagonalArch.Domain.SeedWork;
 using Microsoft.Extensions.Logging;
@@ -11,26 +10,26 @@ namespace HexagonalArch.Application.Test.Features.CollectedBalanceChallenge.Comm
 
 public class AddChallengeParticipationCommandHandlerTest
 {
+    private readonly Mock<IGuidProvider> _guidProviderMock;
+    private readonly Mock<Aggregates.ICollectedBalanceChallengeRepository> _repositoryMock;
     private readonly AddChallengeParticipationCommandHandler _sut;
 
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-    private readonly Mock<IGuidProvider> _guidProviderMock;
-    private readonly Mock<ICollectedBalanceChallengeRepository> _repositoryMock;
-    private readonly Mock<ILogger<AddChallengeParticipationCommandHandler>> _loggerMock;
 
     public AddChallengeParticipationCommandHandlerTest()
     {
         _unitOfWorkMock = new Mock<IUnitOfWork>();
         _guidProviderMock = new Mock<IGuidProvider>();
 
-        _repositoryMock = new Mock<ICollectedBalanceChallengeRepository>();
+        _repositoryMock = new Mock<Aggregates.ICollectedBalanceChallengeRepository>();
         _repositoryMock
             .Setup(x => x.UnitOfWork)
             .Returns(_unitOfWorkMock.Object);
 
-        _loggerMock = new Mock<ILogger<AddChallengeParticipationCommandHandler>>();
+        Mock<ILogger<AddChallengeParticipationCommandHandler>> loggerMock = new();
 
-        _sut = new AddChallengeParticipationCommandHandler(_repositoryMock.Object, _loggerMock.Object, _guidProviderMock.Object);
+        _sut = new AddChallengeParticipationCommandHandler(_repositoryMock.Object, loggerMock.Object,
+            _guidProviderMock.Object);
     }
 
     [Fact]
@@ -53,15 +52,16 @@ public class AddChallengeParticipationCommandHandlerTest
 
         _repositoryMock
             .Setup(m => m.GetChallengesByUserId(userId))
-            .ReturnsAsync(new List<Aggregates.CollectedBalanceChallenge>{
+            .ReturnsAsync(new List<Aggregates.CollectedBalanceChallenge>
+            {
                 challengeOne,
                 challengeTwo
             });
 
         var command = new AddChallengeParticipationCommand(userId,
-                                                        Guid.NewGuid(),
-                                                        partcipationAmount,
-                                                        DateTime.Now);
+            Guid.NewGuid(),
+            partcipationAmount,
+            DateTime.Now);
         //Act
         var result = await _sut.Handle(command, default);
 
@@ -79,13 +79,13 @@ public class AddChallengeParticipationCommandHandlerTest
         );
 
         Assert.Collection(
-            result.Value!.ParticipationsIds,
+            result.Value!.ParticipationIds,
             id => Assert.Equal(id, participationIdOne),
             id => Assert.Equal(id, participationIdTwo)
         );
 
         _unitOfWorkMock.Verify(m =>
-            m.SaveChangesAsync(It.IsAny<CancellationToken>()),
+                m.SaveChangesAsync(It.IsAny<CancellationToken>()),
             Times.Once);
     }
 
@@ -93,9 +93,10 @@ public class AddChallengeParticipationCommandHandlerTest
     {
         var id = Guid.NewGuid();
         var challengeName = ChallengeName.Create(name);
-        var constraint = CollectedBalanceConstraint.Create(10, amount);
+        var constraint = Aggregates.CollectedBalanceConstraint.Create(10, amount);
 
-        var challenge = Aggregates.CollectedBalanceChallenge.Create(id, challengeName, constraint, DateTime.Now.AddHours(-1)).Value;
+        var challenge = Aggregates.CollectedBalanceChallenge
+            .Create(id, challengeName, constraint, DateTime.Now.AddHours(-1)).Value;
         return challenge!;
     }
 }

@@ -1,6 +1,6 @@
 using HexagonalArch.Domain.Primitives;
 
-namespace HexagonalArch.Domain.Test.Aggregates.TransactionAggregate;
+namespace HexagonalArch.Domain.Test.Aggregates.CollectedBalanceAggregate;
 
 public class PeriodTest
 {

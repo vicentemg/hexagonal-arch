@@ -1,4 +1,5 @@
 namespace HexagonalArch.Application.Providers;
+
 public interface IDateTimeProvider
 {
     DateTime Now { get; }
