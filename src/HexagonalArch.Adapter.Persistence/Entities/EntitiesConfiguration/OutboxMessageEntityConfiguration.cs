@@ -1,4 +1,4 @@
-using HexagonalArch.Application.Services;
+﻿using HexagonalArch.Application.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

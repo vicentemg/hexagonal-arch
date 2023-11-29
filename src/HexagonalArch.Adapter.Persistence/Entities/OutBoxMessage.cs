@@ -1,4 +1,4 @@
-using HexagonalArch.Application.Services;
+﻿using HexagonalArch.Application.Services;
 
 namespace HexagonalArch.Adapter.Persistence.Entities;
 

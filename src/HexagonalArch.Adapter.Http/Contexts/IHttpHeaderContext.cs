@@ -1,4 +1,4 @@
-namespace HexagonalArch.Adapter.Http.Contexts;
+﻿namespace HexagonalArch.Adapter.Http.Contexts;
 
 public interface IHttpHeaderContext
 {

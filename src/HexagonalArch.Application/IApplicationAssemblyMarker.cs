@@ -1,4 +1,4 @@
-namespace HexagonalArch.Application;
+﻿namespace HexagonalArch.Application;
 
 internal interface IApplicationAssemblyMarker
 {

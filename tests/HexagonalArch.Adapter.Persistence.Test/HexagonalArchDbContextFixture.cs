@@ -1,11 +1,11 @@
-using HexagonalArch.Application.Events;
+﻿using HexagonalArch.Application.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 
 namespace HexagonalArch.Adapter.Persistence.Test;
 
-public class HexagonalArchDbContextFixture : IDisposable
+public class HexagonalArchDbContextFixture
 {
     public HexagonalArchDbContextFixture()
     {
@@ -29,9 +29,4 @@ public class HexagonalArchDbContextFixture : IDisposable
     public HexagonalArchDbContext DbContext { get; }
     public Mock<IDomainEventDispatcher> DomainEventDispatcherMock { get; }
 
-    public void Dispose()
-    {
-        DbContext.Database.EnsureDeleted();
-        DbContext.Dispose();
-    }
 }

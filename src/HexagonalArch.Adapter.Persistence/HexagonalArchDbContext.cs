@@ -1,4 +1,4 @@
-using HexagonalArch.Adapter.Persistence.Entities;
+﻿using HexagonalArch.Adapter.Persistence.Entities;
 using HexagonalArch.Application.Events;
 using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.SeedWork;

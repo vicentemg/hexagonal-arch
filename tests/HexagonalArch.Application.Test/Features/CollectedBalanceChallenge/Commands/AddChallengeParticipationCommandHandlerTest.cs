@@ -1,4 +1,4 @@
-using HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
+﻿using HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Domain.Primitives;
 using HexagonalArch.Domain.SeedWork;

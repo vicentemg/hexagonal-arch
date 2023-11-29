@@ -1,4 +1,4 @@
-namespace HexagonalArch.Adapter.Cache.Test;
+﻿namespace HexagonalArch.Adapter.Cache.Test;
 
 public class UnitTest1
 {

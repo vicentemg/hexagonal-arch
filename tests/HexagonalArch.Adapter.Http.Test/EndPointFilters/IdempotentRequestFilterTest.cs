@@ -1,4 +1,4 @@
-using HexagonalArch.Adapter.Http.Contexts;
+﻿using HexagonalArch.Adapter.Http.Contexts;
 using HexagonalArch.Adapter.Http.EndPointFilters;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Application.Services;

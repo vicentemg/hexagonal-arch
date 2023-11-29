@@ -1,4 +1,4 @@
-using HexagonalArch.Domain.Primitives;
+﻿using HexagonalArch.Domain.Primitives;
 
 namespace HexagonalArch.Domain.Test.Aggregates.CollectedBalanceAggregate;
 

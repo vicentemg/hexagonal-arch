@@ -1,4 +1,4 @@
-using HexagonalArch.Adapter.Http.Endpoints;
+﻿using HexagonalArch.Adapter.Http.Endpoints;
 
 namespace HexagonalArch.Adapter.Http;
 

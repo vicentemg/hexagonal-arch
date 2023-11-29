@@ -1,4 +1,4 @@
-namespace HexagonlArch.Adapter.BusProcess.Test;
+﻿namespace HexagonlArch.Adapter.BusProcess.Test;
 
 public class UnitTest1
 {

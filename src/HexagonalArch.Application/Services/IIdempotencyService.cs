@@ -1,4 +1,4 @@
-namespace HexagonalArch.Application.Services;
+﻿namespace HexagonalArch.Application.Services;
 
 public interface IIdempotencyService
 {

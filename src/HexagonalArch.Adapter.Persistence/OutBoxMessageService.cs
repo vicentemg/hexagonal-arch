@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using HexagonalArch.Adapter.Persistence.Entities;
 using HexagonalArch.Application.Events;
 using HexagonalArch.Application.Providers;
@@ -32,10 +32,9 @@ public class OutBoxMessageService : IOutBoxMessageService
     {
         var id = _guidProvider.NewId();
         var occurredOn = _dateTimeProvider.UtcNow;
-        var eventType = integrationEvent.GetType();
+        var eventType = integrationEvent?.GetType() ?? throw new InvalidOperationException("invalid type");
         var eventData = JsonSerializer.Serialize(integrationEvent, eventType);
-
-        var outBoxMessage = new OutBoxMessage(id, eventType.AssemblyQualifiedName, eventData, occurredOn);
+        var outBoxMessage = new OutBoxMessage(id, eventType.AssemblyQualifiedName!, eventData, occurredOn);
 
         await _dbContext.OutBoxMessages.AddAsync(outBoxMessage, cancellationToken);
 
@@ -76,7 +75,7 @@ public class OutBoxMessageService : IOutBoxMessageService
 
         var message = await GetEventByIdAsync(eventId, cancellationToken);
 
-        if (message.Status != OutBoxMessageStatus.InProgress)
+        if (message.Status is not OutBoxMessageStatus.InProgress)
         {
             _logger.LogError(
                 "You can not mark this event as Success due to its current status: {CurrentOutBoxMessageStatus}",

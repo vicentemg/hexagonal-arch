@@ -1,4 +1,4 @@
-using HexagonalArch.Application.Events;
+﻿using HexagonalArch.Application.Events;
 using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.Primitives;
 

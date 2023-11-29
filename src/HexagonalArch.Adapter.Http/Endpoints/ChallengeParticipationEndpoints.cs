@@ -1,4 +1,4 @@
-namespace HexagonalArch.Adapter.Http.Endpoints;
+﻿namespace HexagonalArch.Adapter.Http.Endpoints;
 
 internal static class ChallengeParticipationEndpoints
 {

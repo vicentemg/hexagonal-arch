@@ -1,4 +1,4 @@
-using HexagonalArch.Application.Providers;
+﻿using HexagonalArch.Application.Providers;
 using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.SeedWork;
 using Microsoft.Extensions.Logging;

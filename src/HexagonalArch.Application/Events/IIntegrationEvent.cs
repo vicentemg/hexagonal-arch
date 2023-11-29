@@ -1,4 +1,4 @@
-namespace HexagonalArch.Application.Events;
+﻿namespace HexagonalArch.Application.Events;
 
 public interface IIntegrationEvent
 {

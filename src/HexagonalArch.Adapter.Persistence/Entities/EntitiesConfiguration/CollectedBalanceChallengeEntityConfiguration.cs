@@ -1,4 +1,4 @@
-using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
+﻿using HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 using HexagonalArch.Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

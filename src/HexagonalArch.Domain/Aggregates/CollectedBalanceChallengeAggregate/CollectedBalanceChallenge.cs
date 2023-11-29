@@ -16,6 +16,7 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
         Id = id;
         Name = name;
         CreatedDateTime = createdDateTime;
+        CollectedBalanceConstraint = null!;
     }
 
     private CollectedBalanceChallenge(
@@ -46,7 +47,6 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
         if (constraint is null) return Result<CollectedBalanceChallenge>.Failure("The challenge constraint is null");
 
         if (name is null) return Result<CollectedBalanceChallenge>.Failure("The challenge name is empty");
-
 
         return new CollectedBalanceChallenge(id, name, constraint, createdDateTime);
     }

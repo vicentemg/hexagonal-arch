@@ -1,4 +1,4 @@
-namespace HexagonalArch.Domain.SeedWork;
+﻿namespace HexagonalArch.Domain.SeedWork;
 
 public interface IDomainEvent
 {

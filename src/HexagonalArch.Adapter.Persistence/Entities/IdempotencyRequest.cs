@@ -1,4 +1,4 @@
-namespace HexagonalArch.Adapter.Persistence.Entities;
+﻿namespace HexagonalArch.Adapter.Persistence.Entities;
 
 public class IdempotencyRequest
 {
