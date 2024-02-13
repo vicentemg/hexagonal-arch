@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 using HexagonalArch.Adapter.Persistence.Entities;
-using HexagonalArch.Application.Events;
+using HexagonalArch.Application.Events.Integration;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Application.Services;
 using Microsoft.EntityFrameworkCore;

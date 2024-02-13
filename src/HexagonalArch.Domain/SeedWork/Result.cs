@@ -2,38 +2,33 @@
 
 public record Result<TValue>
 {
-    private readonly List<string> _errors = new();
+    private Result()
+    {
+    }
 
     private Result(TValue value)
     {
         Value = value;
     }
 
-    private Result(IEnumerable<string> errors)
+    public Result(Error error)
     {
-        _errors = errors.ToList();
+        Error = error;
     }
 
     public TValue? Value { get; }
+    public Error? Error { get; }
 
-    public IReadOnlyCollection<string> Errors => _errors;
-
-    public bool IsSuccess
-        => (_errors is null || !_errors.Any()) && Value is not null;
+    public bool IsSuccess => Error is null && Value is not null;
 
     public static Result<TValue> Success(TValue value)
     {
         return new Result<TValue>(value);
     }
 
-    public static Result<TValue> Failure(IEnumerable<string> errors)
+    public static Result<TValue> Failure(Error error)
     {
-        return new Result<TValue>(errors);
-    }
-
-    public static Result<TValue> Failure(string error)
-    {
-        return Failure(new[] { error });
+        return new Result<TValue>(error);
     }
 
     public static implicit operator Result<TValue>(TValue value)
@@ -41,9 +36,16 @@ public record Result<TValue>
         return Success(value);
     }
 
+    public static implicit operator Result<TValue>(Error error)
+    {
+        return Failure(error);
+    }
+
     public static implicit operator TValue(Result<TValue> result)
     {
         ArgumentNullException.ThrowIfNull(result.Value);
         return result.Value;
     }
+
 }
+public record Error(int Code, string Message);

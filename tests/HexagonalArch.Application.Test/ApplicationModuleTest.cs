@@ -1,4 +1,4 @@
-﻿using HexagonalArch.Application.Events;
+﻿using HexagonalArch.Application.Events.Domain;
 using HexagonalArch.Domain.Events;
 using Microsoft.Extensions.DependencyInjection;
 

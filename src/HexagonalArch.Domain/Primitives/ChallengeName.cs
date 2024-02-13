@@ -1,4 +1,5 @@
-﻿using HexagonalArch.Domain.SeedWork;
+﻿using HexagonalArch.Domain.Errors;
+using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Domain.Primitives;
 
@@ -8,9 +9,9 @@ public record ChallengeName(string Value)
 
     public static Result<ChallengeName> Create(string value)
     {
-        if (string.IsNullOrEmpty(value)) return Result<ChallengeName>.Failure("Empty value is not allowed");
+        if (string.IsNullOrEmpty(value)) return ChallengeNameErrors.NameIsEmpty;
 
-        if (value.Length > Length) return Result<ChallengeName>.Failure("Characters exceeded");
+        if (value.Length > Length) return ChallengeNameErrors.CharactersExceeded;
 
         return new ChallengeName(value);
     }

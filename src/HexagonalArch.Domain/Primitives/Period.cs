@@ -1,4 +1,5 @@
-﻿using HexagonalArch.Domain.SeedWork;
+﻿using HexagonalArch.Domain.Errors;
+using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Domain.Primitives;
 
@@ -13,7 +14,7 @@ public record Period(DateTime Start, DateTime End)
 
     public static Result<Period> Create(DateTime dateOne, DateTime dateTwo)
     {
-        if (dateOne > dateTwo) return Result<Period>.Failure(new[] { "invalid range of dates" });
+        if (dateOne > dateTwo) return PeriodErrors.InvalidRange;
 
         return new Period(dateOne, dateTwo);
     }

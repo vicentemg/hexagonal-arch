@@ -1,10 +1,10 @@
 ﻿using HexagonalArch.Adapter.Http.Contexts;
-using HexagonalArch.Adapter.Http.EndPointFilters;
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
+using HexagonalArch.Adapter.Http.Endpoints.Filters;
 
 namespace HexagonalArch.Adapter.Http.Test.EndPointFilters;
 

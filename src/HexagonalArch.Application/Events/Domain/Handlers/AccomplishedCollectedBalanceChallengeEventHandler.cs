@@ -5,7 +5,7 @@ using HexagonalArch.Application.Services;
 using HexagonalArch.Domain.Events;
 using Microsoft.Extensions.Logging;
 
-namespace HexagonalArch.Application.Events.DomainEventHandlers;
+namespace HexagonalArch.Application.Events.Domain.Handlers;
 
 public class
     AccomplishedCollectedBalanceChallengeEventHandler : IDomainEventHandler<AccomplishedCollectedBalanceChallenge>

@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using HexagonalArch.Application.Events;
+using HexagonalArch.Application.Events.Domain;
+using HexagonalArch.Application.Events.Integration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HexagonalArch.Application;
@@ -13,7 +15,7 @@ public static class ApplicationModule
         return services
             .AddEventHandlers(assembly)
             .AddTransient<IIntegrationEventDispatcher, IntegrationEventDispatcher>()
-            .AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
+            .AddTransient<IEventDispatcher, DomainEventDispatcher>();
     }
 
     internal static IServiceCollection AddEventHandlers(this IServiceCollection services, Assembly assembly)

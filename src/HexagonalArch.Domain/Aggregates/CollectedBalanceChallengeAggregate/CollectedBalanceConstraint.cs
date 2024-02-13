@@ -1,4 +1,5 @@
-﻿using HexagonalArch.Domain.SeedWork;
+﻿using HexagonalArch.Domain.Errors;
+using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Domain.Aggregates.CollectedBalanceChallengeAggregate;
 
@@ -21,7 +22,7 @@ public class CollectedBalanceConstraint : Entity
         ushort backwardDayPeriod,
         decimal amount)
     {
-        if (amount <= 0) return Result<CollectedBalanceConstraint>.Failure("Amount should be greater than 0");
+        if (amount <= 0) return CollectedBalanceConstraintErrors.InvalidAmount;
 
         return new CollectedBalanceConstraint(backwardDayPeriod, amount);
     }

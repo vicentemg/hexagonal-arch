@@ -2,7 +2,7 @@
 using HexagonalArch.Application.Providers;
 using HexagonalArch.Application.Services;
 
-namespace HexagonalArch.Adapter.Http.EndPointFilters;
+namespace HexagonalArch.Adapter.Http.Endpoints.Filters;
 
 public class IdempotentRequestFilter : IEndpointFilter
 {

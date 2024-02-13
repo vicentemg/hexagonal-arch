@@ -11,7 +11,7 @@ public static class HttpModule
 
     public static WebApplication UseHttpAdapter(this WebApplication app)
     {
-        app.MapChallengeParticipation();
+        app.MapChallengeParticipationEndPoints();
 
         return app;
     }

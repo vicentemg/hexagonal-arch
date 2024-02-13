@@ -1,12 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using HexagonalArch.Domain.SeedWork;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace HexagonalArch.Application.Events;
+namespace HexagonalArch.Application.Events.Domain;
 
-public class IntegrationEventDispatcher : IIntegrationEventDispatcher
+public class DomainEventDispatcher : IEventDispatcher
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public IntegrationEventDispatcher(IServiceProvider serviceProvider)
+    public DomainEventDispatcher(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
@@ -15,8 +16,8 @@ public class IntegrationEventDispatcher : IIntegrationEventDispatcher
     {
         var eventType = @event.GetType();
 
-        if (!eventType.IsAssignableTo(typeof(IIntegrationEvent)))
-            throw new ArgumentException($"{eventType} is not type of {typeof(IIntegrationEvent)}");
+        if (!eventType.IsAssignableTo(typeof(IDomainEvent)))
+            throw new ArgumentException($"{eventType} is not type of {typeof(IDomainEvent)}");
 
         var handlers = GetHandlers(eventType);
 
@@ -28,9 +29,9 @@ public class IntegrationEventDispatcher : IIntegrationEventDispatcher
         }
     }
 
-    private IEnumerable<object> GetHandlers(Type eventTYpe)
+    private IEnumerable<object> GetHandlers(Type eventType)
     {
-        var handlerType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventTYpe);
+        var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(eventType);
 
         return _serviceProvider
             .GetServices(handlerType)

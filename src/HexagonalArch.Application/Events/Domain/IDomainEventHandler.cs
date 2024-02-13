@@ -1,6 +1,6 @@
 ﻿using HexagonalArch.Domain.SeedWork;
 
-namespace HexagonalArch.Application.Events;
+namespace HexagonalArch.Application.Events.Domain;
 
 public interface IDomainEventHandler<TEvent> where TEvent : IDomainEvent
 {

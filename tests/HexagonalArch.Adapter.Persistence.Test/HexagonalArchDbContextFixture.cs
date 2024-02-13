@@ -9,7 +9,7 @@ public class HexagonalArchDbContextFixture
 {
     public HexagonalArchDbContextFixture()
     {
-        DomainEventDispatcherMock = new Mock<IDomainEventDispatcher>();
+        DomainEventDispatcherMock = new Mock<IEventDispatcher>();
 
         var dbContextOptions = new DbContextOptionsBuilder<HexagonalArchDbContext>()
             .UseInMemoryDatabase("BloggingControllerTest")
@@ -27,6 +27,6 @@ public class HexagonalArchDbContextFixture
     }
 
     public HexagonalArchDbContext DbContext { get; }
-    public Mock<IDomainEventDispatcher> DomainEventDispatcherMock { get; }
+    public Mock<IEventDispatcher> DomainEventDispatcherMock { get; }
 
 }

@@ -1,4 +1,5 @@
-﻿using HexagonalArch.Domain.Events;
+﻿using HexagonalArch.Domain.Errors;
+using HexagonalArch.Domain.Events;
 using HexagonalArch.Domain.Primitives;
 using HexagonalArch.Domain.SeedWork;
 
@@ -44,9 +45,9 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
         DateTime createdDateTime
     )
     {
-        if (constraint is null) return Result<CollectedBalanceChallenge>.Failure("The challenge constraint is null");
+        if (constraint is null) return CollectedBalanceChallengeErrors.ChallengeConstraintIsNull;
 
-        if (name is null) return Result<CollectedBalanceChallenge>.Failure("The challenge name is empty");
+        if (name is null) return CollectedBalanceChallengeErrors.ChallengeNameIsNull;
 
         return new CollectedBalanceChallenge(id, name, constraint, createdDateTime);
     }
@@ -55,11 +56,11 @@ public class CollectedBalanceChallenge : Entity, IAggregateRoot
         CollectedBalanceChallengeParticipation participation)
     {
         if (!participation.ChallengeId.Equals(Id))
-            return Result<CollectedBalanceChallengeParticipation>.Failure("Invalid challenge id associated");
+            return CollectedBalanceChallengeErrors.InvalidChallengeId;
 
         var periodResult = GetPeriodFromParticipation(participation);
 
-        if (!periodResult.IsSuccess) return Result<CollectedBalanceChallengeParticipation>.Failure(periodResult.Errors);
+        if (!periodResult.IsSuccess) return periodResult.Error!;
 
         var inRangeParticipations = _participations
             .Where(p => participation.UserId.Equals(p.UserId)

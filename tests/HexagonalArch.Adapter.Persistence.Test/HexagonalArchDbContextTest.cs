@@ -6,7 +6,7 @@ namespace HexagonalArch.Adapter.Persistence.Test;
 
 public class HexagonalArchDbContextTest : IClassFixture<HexagonalArchDbContextFixture>
 {
-    private readonly Mock<IDomainEventDispatcher> _eventDispatcherMock;
+    private readonly Mock<IEventDispatcher> _eventDispatcherMock;
     private readonly HexagonalArchDbContext _sut;
 
     public HexagonalArchDbContextTest(HexagonalArchDbContextFixture fixture)

@@ -1,4 +1,4 @@
-﻿using HexagonalArch.Application.Events;
+﻿using HexagonalArch.Application.Events.Integration;
 
 namespace HexagonalArch.Application.Services;
 

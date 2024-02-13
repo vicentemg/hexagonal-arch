@@ -16,6 +16,6 @@ public class PeriodTest
 
         //Assert
         Assert.False(period.IsSuccess);
-        Assert.NotEmpty(period.Errors);
+        Assert.NotNull(period.Error);
     }
 }

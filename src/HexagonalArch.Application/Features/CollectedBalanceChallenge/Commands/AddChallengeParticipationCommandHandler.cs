@@ -5,8 +5,10 @@ using Microsoft.Extensions.Logging;
 
 namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Commands;
 
+using Response = AddChallengeParticipationCommand.Response;
+
 public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChallengeParticipationCommand,
-    Result<AddChallengeParticipationCommand.Response>>
+    Result<Response>>
 {
     private readonly IGuidProvider _guidProvider;
     private readonly ILogger<AddChallengeParticipationCommandHandler> _logger;
@@ -22,7 +24,7 @@ public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChalle
         _guidProvider = guidProvider;
     }
 
-    public async Task<Result<AddChallengeParticipationCommand.Response>> Handle(
+    public async Task<Result<Response>> Handle(
         AddChallengeParticipationCommand request, CancellationToken cancellationToken)
     {
         var participationIds = new List<Guid>();
@@ -44,7 +46,7 @@ public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChalle
 
             var result = challenge.AddParticipation(participation);
 
-            if (!result.IsSuccess) return Result<AddChallengeParticipationCommand.Response>.Failure(result.Errors);
+            if (!result.IsSuccess) return result.Error!;
 
             participationIds.Add(newParticipationId);
         }
@@ -52,6 +54,6 @@ public class AddChallengeParticipationCommandHandler : IRequestHandler<AddChalle
         var unitOfWork = _repository.UnitOfWork;
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new AddChallengeParticipationCommand.Response(participationIds);
+        return new Response(participationIds);
     }
 }

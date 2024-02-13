@@ -8,4 +8,5 @@ public record GetChallengeParticipationQuery(Guid Id) : IRequest<GetChallengePar
         public Guid TransactionId { get; init; }
         public DateTime OccurredOn { get; init; }
     }
+
 }

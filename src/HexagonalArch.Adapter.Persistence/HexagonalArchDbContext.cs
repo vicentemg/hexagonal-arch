@@ -9,12 +9,12 @@ namespace HexagonalArch.Adapter.Persistence;
 
 public class HexagonalArchDbContext : DbContext, IUnitOfWork
 {
-    private readonly IDomainEventDispatcher _domainEventDispatcher;
+    private readonly IEventDispatcher _domainEventDispatcher;
     private readonly ILogger<HexagonalArchDbContext> _logger;
 
     public HexagonalArchDbContext(
         DbContextOptions<HexagonalArchDbContext> options,
-        IDomainEventDispatcher domainEventDispatcher,
+        IEventDispatcher domainEventDispatcher,
         ILogger<HexagonalArchDbContext> logger) : base(options)
     {
         ArgumentNullException.ThrowIfNull(logger);

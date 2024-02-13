@@ -1,23 +1,29 @@
-﻿namespace HexagonalArch.Adapter.Http.Endpoints;
+﻿using HexagonalArch.Application.Features;
+using HexagonalArch.Application.Features.CollectedBalanceChallenge.Queries;
+
+namespace HexagonalArch.Adapter.Http.Endpoints;
 
 internal static class ChallengeParticipationEndpoints
 {
-    internal static WebApplication MapChallengeParticipation(this WebApplication app)
+    private static readonly string EndPoint = "challenge-participation";
+
+    internal static WebApplication MapChallengeParticipationEndPoints(this WebApplication app)
     {
-        // app.MapGet($"{EndPoint}/{{id}}", GetChallengeParticipation);
-        // app.MapPost(EndPoint, AddParticipation);
+        app.MapGet($"{EndPoint}/{{id}}", GetChallengeParticipation);
 
         return app;
     }
 
-    // internal static async Task<IResult> GetChallengeParticipation(IMediator mediator, Guid participationId)
-    // {
-    //     var result = await mediator.Send(new GetChallengeParticipationQuery(Guid.NewGuid()));
+    internal static async Task<IResult> GetChallengeParticipation(
+        IRequestHandler<GetChallengeParticipationQuery, GetChallengeParticipationQuery.Response> requestHandler,
+        Guid participationId)
+    {
+        var result = await requestHandler.Handle(new GetChallengeParticipationQuery(Guid.NewGuid()), default);
 
-    //     return result is not null ?
-    //         Results.Ok(result)
-    //         : Results.NotFound();
-    // }
+        return result is not null ?
+            Results.Ok(result)
+            : Results.NotFound();
+    }
 
     // internal static async Task<IResult> AddParticipation(IMediator mediator, AddChallengeParticipationCommand command)
     // {
