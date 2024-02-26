@@ -1,12 +1,8 @@
-﻿namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Queries;
+﻿using HexagonalArch.Domain.SeedWork;
 
-public record GetChallengeParticipationQuery(Guid Id) : IRequest<GetChallengeParticipationQuery.Response>
+namespace HexagonalArch.Application.Features.CollectedBalanceChallenge.Queries;
+
+public record GetChallengeParticipationQuery(Guid Id) : IRequest<Result<GetChallengeParticipationQuery.Response>>
 {
-    public record Response
-    {
-        public Guid Id { get; init; }
-        public Guid TransactionId { get; init; }
-        public DateTime OccurredOn { get; init; }
-    }
-
+    public record Response(Guid Id, Guid TransactionId, DateTime OccurredOn);
 }

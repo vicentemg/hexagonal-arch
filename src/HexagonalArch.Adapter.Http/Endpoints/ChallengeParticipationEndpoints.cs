@@ -1,11 +1,12 @@
 ﻿using HexagonalArch.Application.Features;
 using HexagonalArch.Application.Features.CollectedBalanceChallenge.Queries;
+using HexagonalArch.Domain.SeedWork;
 
 namespace HexagonalArch.Adapter.Http.Endpoints;
 
 internal static class ChallengeParticipationEndpoints
 {
-    private static readonly string EndPoint = "challenge-participation";
+    private const string EndPoint = "challenge-participation";
 
     internal static WebApplication MapChallengeParticipationEndPoints(this WebApplication app)
     {
@@ -15,7 +16,7 @@ internal static class ChallengeParticipationEndpoints
     }
 
     internal static async Task<IResult> GetChallengeParticipation(
-        IRequestHandler<GetChallengeParticipationQuery, GetChallengeParticipationQuery.Response> requestHandler,
+        IRequestHandler<GetChallengeParticipationQuery, Result<GetChallengeParticipationQuery.Response>> requestHandler,
         Guid participationId)
     {
         var result = await requestHandler.Handle(new GetChallengeParticipationQuery(Guid.NewGuid()), default);
@@ -24,16 +25,4 @@ internal static class ChallengeParticipationEndpoints
             Results.Ok(result)
             : Results.NotFound();
     }
-
-    // internal static async Task<IResult> AddParticipation(IMediator mediator, AddChallengeParticipationCommand command)
-    // {
-    //     var result = await mediator.Send(command);
-
-    //     if (!result.IsSuccess)
-    //     {
-    //         var detail = result.Errors.First();
-    //         return Results.Problem(detail: detail);
-    //     }
-    //     return Results.Created($"", result.Value);
-    // }
 }
