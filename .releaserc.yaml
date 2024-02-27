@@ -1,11 +1,12 @@
 branch: 
   - name: "master"
-  - name: "vicentemg/issue1"
+  - name: "beta"
     prerelease: true
 
 plugins:
-  - "@semantic-release/commit-analyzer"
-  - "@semantic-release/release-notes-generator"
-  - "@semantic-release/changelog"
-  - "@semantic-release/git"
-  - "@semantic-release/github"
+  - name: "@semantic-release/commit-analyzer"
+  - name: "@semantic-release/release-notes-generator"
+  - name: "@semantic-release/changelog"
+    changelogFile: "docs/CHANGELOG.md"
+  - name: "@semantic-release/git"
+  - name: "@semantic-release/github"
