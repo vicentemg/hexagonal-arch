@@ -22,18 +22,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v4
-        with: 
-          dotnet-version: '8'
+      
       - name: Install dependencies
         run: npm clean-install
+      
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
+      
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: '8.0.x'
+      
       - name: Release
         env:
           NUGET_API_KEY: ${{ secrets.nuget }}

@@ -11,7 +11,7 @@
     [
       "@semantic-release/exec",
       {
-        "verifyConditionsCmd": "dotnet -v"
+        "verifyConditionsCmd": "dotnet build ."
       }
     ],
     "@semantic-release/git",
