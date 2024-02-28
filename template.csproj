@@ -9,7 +9,7 @@
     <Authors>Vicente M. Gonzalez</Authors>
     <Description>Templates to use when creating an application using hexagonal architecture</Description>
     <PackageProjectUrl>https://github.com/vicentemg/hexagonal-arch</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/vicentemg/hexagonal-arch/releases/tag/$(RELEASE_VERSION)</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/vicentemg/hexagonal-arch/releases/tag/v$(RELEASE_VERSION)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>dotnet-new;templates;hexagonal</PackageTags>
     <IncludeContentInPack>true</IncludeContentInPack>
