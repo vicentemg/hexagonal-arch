@@ -12,7 +12,7 @@
       "@semantic-release/exec",
       {
         "verifyConditionsCmd": "dotnet build ./template.csproj && dotnet build ./HexagonalArch.sln",
-        "prepareCmd": "echo ${nextRelease.notes} > ./docs/releasenotes.txt && dotnet pack ./template.csproj -c Release -p:Version=${nextRelease.version} -o ./package && dotnet nuget push ./package/Vicentemg.HexagonalArch.${nextRelease.version}.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY --no-service-endpoint"
+        "prepareCmd": "export RELEASE_NOTES='${nextRelease.notes}' && dotnet pack ./template.csproj -c Release -p:Version=${nextRelease.version} -o ./package && dotnet nuget push ./package/Vicentemg.HexagonalArch.${nextRelease.version}.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY --no-service-endpoint"
       }
     ],
     [
