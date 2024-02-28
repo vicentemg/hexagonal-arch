@@ -11,6 +11,7 @@
     <PackageProjectUrl>https://github.com/vicentemg/hexagonal-arch</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/vicentemg/hexagonal-arch/releases/tag/v$(RELEASE_VERSION)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageTags>dotnet-new;templates;hexagonal</PackageTags>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
