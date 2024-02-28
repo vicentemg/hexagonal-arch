@@ -11,10 +11,19 @@
     [
       "@semantic-release/exec",
       {
-        "verifyConditionsCmd": "dotnet build ."
+        "verifyConditionsCmd": "dotnet build .",
+        "prepareCmd": "dotnet pack ./template.csproj -c Release -p:Version=${nextRelease.version} -o ./package",
+        "publishCmd": "dotnet nuget push ./package/*.nupkg --source https://www.nuget.org/api/v2/package --api-key $NUGET"
       }
     ],
-    "@semantic-release/git",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "docs/CHANGELOG.md"
+        ]
+      }
+    ],
     "@semantic-release/github"
   ]
 }

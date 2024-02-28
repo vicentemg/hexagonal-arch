@@ -1,0 +1,1 @@
+# HexagonalArch Template
