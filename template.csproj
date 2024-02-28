@@ -3,12 +3,13 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <TargetFramework>net8.0</TargetFramework>
+    <PackageVersion>$(RELEASE_VERSION)</PackageVersion>
     <PackageId>Vicentemg.HexagonalArch</PackageId>
     <Title>HexagonalArch Templates</Title>
     <Authors>Vicente M. Gonzalez</Authors>
     <Description>Templates to use when creating an application using hexagonal architecture</Description>
     <PackageProjectUrl>https://github.com/vicentemg/hexagonal-arch</PackageProjectUrl>
-    <PackageReleaseNotes>$(RELEASE_NOTES)</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/vicentemg/hexagonal-arch/releases/tag/$(RELEASE_VERSION)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>dotnet-new;templates;hexagonal</PackageTags>
     <IncludeContentInPack>true</IncludeContentInPack>
