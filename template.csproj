@@ -8,7 +8,7 @@
     <Authors>Vicente M. Gonzalez</Authors>
     <Description>Templates to use when creating an application using hexagonal architecture</Description>
     <PackageProjectUrl>https://github.com/vicentemg/hexagonal-arch</PackageProjectUrl>
-    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/docs/CHANGELOG.md"))</PackageReleaseNotes>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/docs/releasenotes.txt"))</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>dotnet-new;templates;hexagonal</PackageTags>
     <IncludeContentInPack>true</IncludeContentInPack>
