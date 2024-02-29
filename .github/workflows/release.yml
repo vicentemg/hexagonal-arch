@@ -41,6 +41,6 @@ jobs:
       
       - name: Release
         env:
-          NUGET_API_KEY: ${{ secrets.nuget }}
+          NUGET_API_KEY: ${{ secrets.NUGET }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release --debug

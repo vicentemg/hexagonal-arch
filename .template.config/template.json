@@ -27,7 +27,9 @@
                 "**/docs/**",
                 "**/.git/**",
                 "**/.github/**",
-                ".releaserc.yaml"
+                "LICENSE",
+                ".releaserc.yaml",
+                "template.csproj"
             ]
         }
     ]
