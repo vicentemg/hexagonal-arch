@@ -1,3 +1,10 @@
+# [1.0.0-beta.8](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2024-02-29)
+
+
+### Bug Fixes
+
+* **ci:** add link to relase notes and version to csproj ([d95f921](https://github.com/vicentemg/hexagonal-arch/commit/d95f92188d670dcd5cec037044a4e9f6bc42288d))
+
 # [1.0.0-beta.7](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2024-02-29)
 
 
