@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2024-02-29)
+
+
+### Bug Fixes
+
+* **ci:** fix prepareCmd pack and publish together ([d3a38f3](https://github.com/vicentemg/hexagonal-arch/commit/d3a38f3903439721412702c8d0df3536372f1b53))
+
 # [1.0.0-beta.4](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2024-02-29)
 
 
