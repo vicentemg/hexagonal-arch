@@ -1,3 +1,10 @@
+# [1.0.0-beta.10](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2024-02-29)
+
+
+### Features
+
+* add LICENSE file ([b5dbffd](https://github.com/vicentemg/hexagonal-arch/commit/b5dbffd59d3c8b60aad18255282f6505f33e404f))
+
 # [1.0.0-beta.9](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2024-02-29)
 
 
