@@ -1,3 +1,16 @@
+# [1.0.0-beta.7](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2024-02-29)
+
+
+### Bug Fixes
+
+* fix releasenotes.txt path ([da923de](https://github.com/vicentemg/hexagonal-arch/commit/da923de389c706e0f83395afe2dce6d9d32d0b2d))
+* Release notes ([b1b7202](https://github.com/vicentemg/hexagonal-arch/commit/b1b7202ac38613aa9eb81117a9064a3792ed9770))
+
+
+### Features
+
+* add just current release notes ([d253a9e](https://github.com/vicentemg/hexagonal-arch/commit/d253a9ecaa6c362c1e5ce224282e1f71dd225f0a))
+
 # [1.0.0-beta.6](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2024-02-29)
 
 
