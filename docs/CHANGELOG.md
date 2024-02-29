@@ -1,3 +1,11 @@
+# [1.0.0-beta.9](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2024-02-29)
+
+
+### Bug Fixes
+
+* api nuget source ([72e8952](https://github.com/vicentemg/hexagonal-arch/commit/72e8952928989657549499a47c97653b4b05ff23))
+* release notes link ([1df26ac](https://github.com/vicentemg/hexagonal-arch/commit/1df26ac331a2616f4b031fcb203ec34ffae1bc13))
+
 # [1.0.0-beta.8](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2024-02-29)
 
 
