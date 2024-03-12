@@ -12,7 +12,7 @@
       "@semantic-release/exec",
       {
         "verifyConditionsCmd": "dotnet build ./template.csproj && dotnet build ./HexagonalArch.sln",
-        "prepareCmd": "export RELEASE_VERSION='${nextRelease.version}' && dotnet pack ./template.csproj -c Release -o ./package && dotnet nuget push ./package/*.nupkg -s https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY --no-service-endpoint"
+        "prepareCmd": "export RELEASE_VERSION='${nextRelease.version}' && dotnet pack ./template.csproj -c Release -o ./package"
       }
     ],
     [
@@ -23,6 +23,17 @@
         ]
       }
     ],
-    "@semantic-release/github"
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "package/*",
+            "name": "nuget_artifacts",
+            "label": "nuget artifacts"
+          }
+        ]
+      }
+    ]
   ]
 }
