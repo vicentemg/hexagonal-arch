@@ -1,3 +1,10 @@
+# [1.0.0-beta.11](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2024-03-13)
+
+
+### Features
+
+* **ci:** add new stage Deploy for pushing artificats to a nuget package management. ([a306521](https://github.com/vicentemg/hexagonal-arch/commit/a3065210a1959c885a82082778a3bfe88257ea02))
+
 # [1.0.0-beta.10](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2024-02-29)
 
 
