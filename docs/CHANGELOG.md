@@ -13,6 +13,18 @@
 # [1.0.0-beta.11](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2024-03-13)
 
 
+### Bug Fixes
+
+* **ci:** create publish stage wrong path ([3fed2d5](https://github.com/vicentemg/hexagonal-arch/commit/3fed2d5421a74f2cacd01bafcbf4450af18db33e)), closes [#4](https://github.com/vicentemg/hexagonal-arch/issues/4)
+
+
+### Features
+
+* **ci:** add new stage Deploy for pushing artificats to a nuget package management. ([a306521](https://github.com/vicentemg/hexagonal-arch/commit/a3065210a1959c885a82082778a3bfe88257ea02))
+
+# [1.0.0-beta.11](https://github.com/vicentemg/hexagonal-arch/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2024-03-13)
+
+
 ### Features
 
 * **ci:** add new stage Deploy for pushing artificats to a nuget package management. ([a306521](https://github.com/vicentemg/hexagonal-arch/commit/a3065210a1959c885a82082778a3bfe88257ea02))
