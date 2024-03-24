@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Domain", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.BusProcess", "src\HexagonalArch.Adapter.BusProcess\HexagonalArch.Adapter.BusProcess.csproj", "{2884C3D6-4E5D-44C1-A70B-4517A05F5783}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonlArch.Adapter.BusProcess.Test", "tests\HexagonalArch.Adapter.BusProcess.Test\HexagonlArch.Adapter.BusProcess.Test.csproj", "{6D318B8D-3D6B-4F1B-941D-BE96320F4AD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.BusProcess.Test", "tests\HexagonalArch.Adapter.BusProcess.Test\HexagonlArch.Adapter.BusProcess.Test.csproj", "{6D318B8D-3D6B-4F1B-941D-BE96320F4AD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalArch.Adapter.Cache.Test", "tests\HexagonalArch.Adapter.Cache.Test\HexagonalArch.Adapter.Cache.Test.csproj", "{142C6441-2437-4340-AF49-403AF6785340}"
 EndProject

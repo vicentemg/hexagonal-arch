@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RewardEat.Adapter.Http\RewardEat.Adapter.Http.csproj" />
+    <ProjectReference Include="..\RewardEat.Application\RewardEat.Application.csproj" />
+    <ProjectReference Include="..\RewardEat.Adapter.Persistence\RewardEat.Adapter.Persistence.csproj" />
+    <ProjectReference Include="..\RewardEat.Adapter.Cache\RewardEat.Adapter.Cache.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -11,7 +11,7 @@
     [
       "@semantic-release/exec",
       {
-        "verifyConditionsCmd": "dotnet build ./template.csproj && dotnet build ./HexagonalArch.sln",
+        "verifyConditionsCmd": "dotnet build ./template.csproj",
         "prepareCmd": "export RELEASE_VERSION='${nextRelease.version}' && dotnet pack ./template.csproj -c Release -o ./package"
       }
     ],
